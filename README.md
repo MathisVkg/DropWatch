@@ -1,6 +1,6 @@
 # DropWatch — v0.3.0
 
-**Local release candidate — not published.** Start with [release readiness](docs/REPORT.md), [manual validation](docs/RELEASE_VALIDATION.md) and the [CurseForge author checklist](docs/CURSEFORGE_RELEASE_CHECKLIST.md). License selection and real gameplay screenshots are pending owner action.
+**Local release candidate — not published.** Start with [release readiness](docs/REPORT.md), [manual validation](docs/RELEASE_VALIDATION.md) and the [CurseForge author checklist](docs/CURSEFORGE_RELEASE_CHECKLIST.md). MIT is selected and packaged. Real gameplay screenshots and final client validation remain pending.
 
 **Group Loot Tracker for Dungeons, Raids & Mythic+**
 
@@ -12,7 +12,7 @@ DropWatch is a standalone WoW Retail Midnight addon with an ElvUI-inspired charc
 
 Exit WoW. Extract DropWatch-0.3.0.zip into _retail_/Interface/AddOns. Verify AddOns/DropWatch/DropWatch.toc exists directly, with no nested duplicate folder. Enable DropWatch and run /dropwatch status to confirm version 0.3.0.
 
-The install ZIP contains runtime files only. Documentation, test fixtures, source artwork and development tools are available in the source tree.
+The install ZIP contains runtime files and the MIT LICENSE. Documentation, test fixtures, source artwork and development tools are available in the source tree.
 
 ## Upgrading from Loot Tracker
 
@@ -66,12 +66,14 @@ Run python tests/run.py with lupa 2.8 (Lua 5.1 backend). Rebuild original SVG/PN
 
 The [1024px project icon](Assets/DropWatch-Project.png) and [vector source](Assets/DropWatch-Project.svg) use charcoal, teal radar circles/sweep and a gold equipment shield. The [simplified minimap variant](Assets/DropWatch-Mini.png) has thick details for small sizes; only its uncompressed 32-bit TGA is loaded in game. See [asset build notes](Assets/README.md).
 
-Read [validation](docs/TESTING.md), [architecture](docs/UI_ARCHITECTURE.md), [API review](docs/API_REVIEW.md), [rebrand report](docs/REPORT.md) and [optional GitHub rename instructions](docs/REPOSITORY_RENAME.md). The local repository and remote are unchanged; no release was published. Release preparation is complete; publication awaits owner approval.
+Read [validation](docs/TESTING.md), [architecture](docs/UI_ARCHITECTURE.md), [API review](docs/API_REVIEW.md), [rebrand report](docs/REPORT.md) and [repository configuration](docs/REPOSITORY_RENAME.md). Git history is preserved and the canonical repository is https://github.com/MathisVkg/DropWatch. No release was published; publication awaits owner approval.
 
 ## Release resources
 
-See [CHANGELOG.md](CHANGELOG.md), [deterministic build instructions](docs/BUILD_RELEASE.md), [CurseForge description](docs/CURSEFORGE_DESCRIPTION.md), [release notes](docs/CURSEFORGE_RELEASE_NOTES.md), [release assets](docs/RELEASE_ASSETS.md), [license options](docs/LICENSE_REVIEW.md), [privacy review](docs/SECURITY_PRIVACY_REVIEW.md), [compatibility audit](docs/COMPATIBILITY_AUDIT.md) and [GitHub preparation](docs/GITHUB_RELEASE.md).
+See [CHANGELOG.md](CHANGELOG.md), [deterministic build instructions](docs/BUILD_RELEASE.md), [CurseForge description](docs/CURSEFORGE_DESCRIPTION.md), [release notes](docs/CURSEFORGE_RELEASE_NOTES.md), [release assets](docs/RELEASE_ASSETS.md), [license and artwork review](docs/LICENSE_REVIEW.md), [privacy review](docs/SECURITY_PRIVACY_REVIEW.md), [compatibility audit](docs/COMPATIBILITY_AUDIT.md) and [GitHub preparation](docs/GITHUB_RELEASE.md).
 
-No LICENSE file is present and none was chosen automatically. MIT is the review recommendation, subject to owner approval; see the comparison before adopting terms.
+## License
+
+The owner selected the [MIT license](LICENSE). Copyright (c) 2026 Mathis Vankoekelberg. Original DropWatch source, documentation, radar artwork and settings gear are covered; see the [licensing review](docs/LICENSE_REVIEW.md) for provenance and third-party exclusions. Blizzard assets referenced through native game paths and World of Warcraft trademarks remain their respective owners’ property.
 
 For support, the configured repository issue URL is https://github.com/MathisVkg/DropWatch/issues. Confirm public access and Issues before publishing it. Include addon/client versions, UI scale, reproduction steps and carefully reviewed/redacted diagnostics; logs never upload automatically.

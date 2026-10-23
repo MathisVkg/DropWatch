@@ -9,7 +9,7 @@
 | Minimap/header | Assets/DropWatch-Mini.tga | Uncompressed 64×64 32-bit game texture; in the runtime ZIP |
 | Settings gear | Assets/Settings.tga | Existing 32×32 game texture; unchanged and packaged |
 
-The generator uses original radar/shield primitives created for this project, with no downloaded third-party illustration. It does not establish or choose a license. Confirm ownership/contributor/artwork terms in the license decision.
+The generator uses original radar/shield primitives created for this project, with no downloaded third-party illustration. The owner selected MIT for the original radar artwork, exports and settings gear; see [licensing scope and exclusions](LICENSE_REVIEW.md). No Blizzard resources are claimed or relicensed.
 
 Rebuild with Python + Pillow 12.3.0: python tools/build_icons.py. Original source icons remain unchanged; the extra portal PNG is a development/public-listing asset, excluded from installation. PNG format avoids the legacy WebP issue described in [official CurseForge guidance](https://support.curseforge.com/support/solutions/articles/9000196615). Check the live portal's current crop/size controls; no moderation acceptance is guaranteed.
 

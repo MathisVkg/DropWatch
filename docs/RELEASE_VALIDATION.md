@@ -2,7 +2,7 @@
 
 ## Evidence status
 
-**Automated:** 830 assertions pass, including all prior tests, new notification regressions, byte-identical packaging across timestamp changes, safe archive contents/checksums and booting the exact ZIP in fresh mocked Lua 5.1. All 19 runtime modules load. This is not a WoW client test.
+**Automated:** 836 assertions pass, including all prior tests, new notification regressions, byte-identical packaging across timestamp changes, MIT license inclusion, safe archive contents/checksums and booting the exact ZIP in fresh mocked Lua 5.1. All 19 runtime modules load. This is not a WoW client test.
 
 **User-reported in game before this RC hardening:** Mythic+ equipment, recipient identification, deduplication, 15-minute Recent expiry, History grouping, Warbound exclusion, main rendering, minimap position and DropWatch branding. No new live test is claimed by the agent.
 
@@ -41,11 +41,11 @@ For modes test automatic opening, manual silence and one compact notification pe
 
 ## Release decision
 
-- [ ] License and artwork terms approved and included by a rebuild.
+- [x] Owner-selected MIT and original artwork terms documented; LICENSE included by a rebuild.
 - [ ] Current-client smoke and upgrade/notification fixes passed.
 - [ ] Raid testing completed, or owner explicitly accepts and publicly discloses the remaining gap.
 - [ ] Real screenshots captured; public source/support links checked.
 - [ ] Final ZIP checksum matches the author-selected source revision.
 - [ ] Owner explicitly approves publication.
 
-No approval, upload, game screenshot or raid test is implied by this document. Use the focused older TESTING.md cases for detailed UI/loot checks.
+License approval is recorded above. No publication approval, upload, game screenshot or raid test is implied by this document. Use the focused older TESTING.md cases for detailed UI/loot checks.

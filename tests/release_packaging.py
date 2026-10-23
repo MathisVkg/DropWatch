@@ -28,6 +28,12 @@ with tempfile.TemporaryDirectory(prefix="dropwatch-release-",dir=scratch) as tem
         check(all(n.startswith("DropWatch/") and ".." not in n.split("/") for n in names),"single safe addon root")
         check(len(names)==len(set(names))==count==other_count,"no duplicate/missing entries")
         check("DropWatch/DropWatch.toc" in names,"manifest matches root")
+        check("DropWatch/LICENSE" in names,"MIT license installed")
+        check(count==23,"only manifest, 19 Lua modules, two textures and LICENSE")
+        legal=archive.read("DropWatch/LICENSE").decode("utf-8")
+        check(legal==(ROOT/"LICENSE").read_text(encoding="utf-8"),"complete legal text preserved")
+        check(legal.startswith("MIT License\n\nCopyright (c) 2026 Mathis Vankoekelberg\n"),"selected MIT copyright")
+        check(legal.rstrip().endswith("SOFTWARE."),"MIT warranty text is complete")
         check(all("/tests/" not in n and "/docs/" not in n and "/tools/" not in n and ".git" not in n for n in names),"no development/debug files")
         check(all(i.date_time==(1980,1,1,0,0,0) for i in archive.infolist()),"portable fixed timestamps")
         lua=LuaRuntime(unpack_returned_tuples=True)
@@ -48,9 +54,9 @@ with tempfile.TemporaryDirectory(prefix="dropwatch-release-",dir=scratch) as tem
     check(manifest["version"]=="0.3.0" and manifest["interface"]=="120105","release metadata sidecar")
     check(len(manifest["files"])==count,"manifest covers all installed files")
     check(digest in (temp/"first"/"DropWatch-0.3.0.sha256").read_text(),"adjacent checksum")
-    # Future owner-approved legal texts must not silently disappear from distribution.
-    (clone/"LICENSE").write_text("Fixture only; not a project license")
-    check("LICENSE" in pack.release_members(clone),"future approved license included")
+    # Optional legal notices must not silently disappear from distribution.
+    (clone/"NOTICE").write_text("Fixture only; not a project notice")
+    check("NOTICE" in pack.release_members(clone),"optional legal notice included")
     (clone/"Core/Namespace.lua").write_text('ns.version = "wrong"')
     try:
         pack.release_members(clone)

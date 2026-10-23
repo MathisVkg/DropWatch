@@ -20,3 +20,7 @@ python tools/build_icons.py
 One geometric scene definition produces vector SVG plus supersampled PNG; the simplified raster is saved as uncompressed 32-bit TGA by Pillow. The game loads TGA only, never PNG/SVG. No image conversion or extra library runs inside WoW. Re-running the generator with this version reproduces the delivered assets. tools/package.py includes only the two runtime TGA textures, excluding project artwork, source SVG/PNG, docs and development tools.
 
 The 16/24/30px raster previews were inspected locally. In-client texture rendering remains pending.
+
+## License
+
+The original radar SVG/PNG/TGA artwork, portal export and original Settings.tga gear are covered by the project [MIT license](../LICENSE). These assets were created specifically for this project from geometric primitives without imported artwork or fonts. See [provenance and third-party exclusions](../docs/LICENSE_REVIEW.md). Blizzard native game resources and trademarks are not included in this grant.

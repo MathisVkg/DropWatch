@@ -8,6 +8,7 @@ First public-version candidate for DropWatch, a standalone group equipment track
 - Adaptive panel height, persistent settings and a draggable radar minimap icon.
 - /dropwatch and /dw commands; /loottracker remains compatible.
 - Release hardening fixes notification tracking and delayed-removal counts.
+- MIT license included, covering original DropWatch artwork; third-party game resources remain their owners’ property.
 
 Mythic+ behavior has been reported working in game; raid-specific validation remains incomplete. No automatic messaging/trading or tradeability guarantee. Upgrading from Loot Tracker requires the documented settings-file copy with WoW closed.
 

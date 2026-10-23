@@ -1,22 +1,17 @@
 # GitHub preparation and draft release
 
-## Reviewed state
+Canonical repository: https://github.com/MathisVkg/DropWatch
+Issue reporting: https://github.com/MathisVkg/DropWatch/issues
 
-- Local source: C:/Users/zeyros/Documents/repository/loot-tracker.
-- HEAD at review: 7c369ce (rename), with initial import 8e71b59; no version tags.
-- Origin: https://github.com/MathisVkg/loot-tracker.git. No rename/push/visibility change performed.
-- README, build instructions, changelog, .gitignore and issue template prepared.
-- LICENSE is absent, pending owner decision. Public source/Issues accessibility was not confirmed by the web fetch; verify in a signed-out browser.
-- No hosted release/build workflow or external credentials are required.
+The existing local repository and Git history are preserved. Task 03.1 commits the approved MIT license, artwork provenance, documentation and packaging tests locally. Origin is aligned with the owner's canonical URL. No push, tag, server-side rename, visibility change or GitHub release is performed.
 
 ## Remaining owner setup
 
-1. Review the local diff, approve a license and complete final client validation/assets.
-2. Confirm repository About title/description/topics, public source access as intended, and Issues. Suggested About text: Standalone group loot tracker for WoW Retail Midnight.
-3. Confirm support links before publishing. If renaming the repository, follow REPOSITORY_RENAME.md and update all source/issues links after the rename; none was made here.
-4. Commit only reviewed source/docs/assets, with no caches/archives. Create a v0.3.0 tag on the validated commit only after approval. Do not tag the previous commit accidentally.
-5. Run python tests/run.py, then python tools/package.py <output-directory>. Attach the runtime ZIP and its SHA256/manifest if creating an approved GitHub release later.
-6. Select Beta/prerelease status or Release consciously. No tag, commit, push or release is created by this task.
+1. Complete exact-candidate client validation, address/disclose the raid gap and supply real screenshots.
+2. Confirm public source access and Issues in a signed-out browser, and review repository About/title/topics.
+3. Review the committed candidate and approve publication separately. MIT is already selected and LICENSE is packaged.
+4. For a later authorized release, run python tests/run.py and python tools/package.py <output-directory> from the selected revision. Review the resulting checksum/manifest.
+5. Only after approval, tag the validated commit v0.3.0, choose the intended prerelease/release type and publish the ZIP with its checksum. None of those publication steps is executed here.
 
 ## Draft release title
 
@@ -26,8 +21,8 @@ DropWatch 0.3.0
 
 DropWatch is a standalone group equipment tracker for WoW Retail Midnight. It provides Recent Loot, grouped session History, native item links, empty Quick Whisper actions, configurable display modes and conservative Warbound filtering.
 
-This candidate includes the radar identity, /dropwatch and /dw commands with /loottracker compatibility, and bounded notification tracking fixes. Install by extracting DropWatch/ into _retail_/Interface/AddOns. Follow the settings migration guide when upgrading from Loot Tracker.
+This candidate includes the original radar identity, /dropwatch and /dw commands with /loottracker compatibility, bounded notification tracking fixes and the MIT license. Install by extracting DropWatch/ into _retail_/Interface/AddOns. Follow the settings migration guide when upgrading from Loot Tracker.
 
 Target: Retail 12.1.5, interface 120105. Mythic+ behavior was reported working in development; raid-specific validation remains incomplete. No automatic messaging/trading or tradeability guarantee. See CHANGELOG.md, RELEASE_VALIDATION.md and LICENSE_REVIEW.md before approval.
 
-Draft only. Final license, screenshots, manual results and author release decision must be resolved before posting this text as an announcement.
+Draft only. Screenshots, manual results and the author release decision remain pending.

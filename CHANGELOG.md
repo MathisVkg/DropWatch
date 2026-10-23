@@ -4,6 +4,8 @@ Version 0.3.0 remains a local release candidate; no public release/tag is create
 
 ## 0.3.0
 
+- Selected MIT, documented original artwork coverage, updated canonical GitHub links and rebuilt the licensed archive without changing addon functionality.
+
 - Rebranded Loot Tracker to DropWatch with original radar project/minimap icons.
 - Added /dropwatch and /dw; kept /loottracker as a compatibility alias.
 - Preserved legacy preference globals with a documented settings-file migration.

@@ -24,7 +24,7 @@ Extract the ZIP into World of Warcraft/_retail_/Interface/AddOns. Confirm DropWa
 
 Use /dropwatch to toggle the panel and /dropwatch settings to configure it. /dw and /loottracker are aliases. Other commands: status, diag, debug, clear, demo, demo burst and demo off.
 
-Upgrading from Loot Tracker? Close WoW before copying the old account SavedVariables/LootTracker.lua to DropWatch.lua unchanged. Back up existing settings first, remove/move the old addon folder outside AddOns, and enable only DropWatch. [Migration guide](https://github.com/MathisVkg/loot-tracker/blob/main/docs/MIGRATION.md).
+Upgrading from Loot Tracker? Close WoW before copying the old account SavedVariables/LootTracker.lua to DropWatch.lua unchanged. Back up existing settings first, remove/move the old addon folder outside AddOns, and enable only DropWatch. [Migration guide](https://github.com/MathisVkg/DropWatch/blob/main/docs/MIGRATION.md).
 
 ## Compatibility and limitations
 
@@ -34,8 +34,8 @@ Only readable client events/data can be displayed. Tradeability is not guarantee
 
 ## Support
 
-[Report an issue](https://github.com/MathisVkg/loot-tracker/issues) with addon/client version, steps and relevant diagnostic details. Review copied logs before sharing and redact player identifiers if needed. Debug data is never uploaded automatically.
+[Report an issue](https://github.com/MathisVkg/DropWatch/issues) with addon/client version, steps and relevant diagnostic details. Review copied logs before sharing and redact player identifiers if needed. Debug data is never uploaded automatically.
 
 ---
 
-Author preparation note — remove this separator/note when pasting: description is a draft, not an announced publication. Verify the support/source links are publicly accessible and Issues are enabled; their web accessibility could not be confirmed in this session. Apply the owner-approved license and finish the release checklist first. No CurseForge project ID or listing URL is invented.
+Author preparation note — remove this separator/note when pasting: description is a draft, not an announced publication. Verify the support/source links are publicly accessible and Issues are enabled; their web accessibility could not be confirmed in this session. MIT is selected; finish the remaining release checklist before publication. No CurseForge project ID or listing URL is invented.
