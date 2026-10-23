@@ -74,4 +74,4 @@ See [CHANGELOG.md](CHANGELOG.md), [deterministic build instructions](docs/BUILD_
 
 No LICENSE file is present and none was chosen automatically. MIT is the review recommendation, subject to owner approval; see the comparison before adopting terms.
 
-For support, the configured repository issue URL is https://github.com/MathisVkg/loot-tracker/issues. Confirm public access and Issues before publishing it. Include addon/client versions, UI scale, reproduction steps and carefully reviewed/redacted diagnostics; logs never upload automatically.
+For support, the configured repository issue URL is https://github.com/MathisVkg/DropWatch/issues. Confirm public access and Issues before publishing it. Include addon/client versions, UI scale, reproduction steps and carefully reviewed/redacted diagnostics; logs never upload automatically.
