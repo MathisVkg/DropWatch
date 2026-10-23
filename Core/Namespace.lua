@@ -1,6 +1,6 @@
 local name, ns = ...
 ns.name = name
-ns.version = "0.2.2"
+ns.version = "0.3.0"
 ns.raw, ns.records, ns.normalized = {}, {}, {}
 ns.sequence = 0
 ns.recordSequence, ns.observationSequence = 0, 0
@@ -29,7 +29,7 @@ function ns:Push(list, value)
     end
 end
 function ns:Print(message)
-    DEFAULT_CHAT_FRAME:AddMessage("|cff80c0ffLoot Tracker:|r " .. message)
+    DEFAULT_CHAT_FRAME:AddMessage("|cff80c0ffDropWatch:|r " .. message)
 end
 function ns:Changed()
     if self.UI then self.UI.dirty = true end

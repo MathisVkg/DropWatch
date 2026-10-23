@@ -6,7 +6,7 @@ function run_interface(ns)
         assert(not ns.raw[#ns.raw] or ns.raw[#ns.raw].status~="unprocessed: handler error","handler failed: "..name)
     end
     local function draw() ns.Main:Render() end
-    event("ADDON_LOADED","LootTracker"); event("PLAYER_ENTERING_WORLD",true,false)
+    event("ADDON_LOADED","DropWatch"); event("PLAYER_ENTERING_WORLD",true,false)
     ns.db.displayMode="manual"
     local function record(id,age,run)
         return {id=id,revision=1,timestamp=time()-(age or 0),equipment=true,selected=true,loaded=true,
@@ -21,7 +21,7 @@ function run_interface(ns)
         ns:Clear(); ns.db.displayMode="manual"; ns.db.trackMounts=false; ns.Main:Close()
     end
     -- 1-3: stable canonical identity and visible row reuse.
-    local a=record(1); put(a); SlashCmdList.LOOTTRACKER(""); draw()
+    local a=record(1); put(a); SlashCmdList.DROPWATCH(""); draw()
     check(#ns.Session.entries==1 and #ns.Main.descriptors==1,"one canonical record creates one row")
     local row=ns.Main.rows["item:1"]
     check(row and row.record.id==1,"row keyed by canonical ID")
@@ -115,7 +115,7 @@ function run_interface(ns)
     ns.Session:OnWorld(true,false)
     check(#ns.Session.entries==0 and LootTrackerSession==nil,"genuine new login discards logout-written history")
     -- 15-16: diagnostics preserved; demo never touches genuine history or native chat.
-    SlashCmdList.LOOTTRACKER("diag"); check(ns.UI.frame:IsShown(),"explicit diagnostic command works")
+    SlashCmdList.DROPWATCH("diag"); check(ns.UI.frame:IsShown(),"explicit diagnostic command works")
     put(record(20)); local genuine=#ns.Session.entries; local calls=whispers
     ns.Demo:Start(); check(ns.Session.demo and #ns.Session:Groups()==2,"demo includes separate history activities")
     check(#ns.Session:Records(true)==4 and ns.Session:Records(true)[1].demo,"demo recent list clearly isolated")

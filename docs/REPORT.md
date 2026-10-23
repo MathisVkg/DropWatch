@@ -1,83 +1,80 @@
-# Task 02.1 — v0.2.1 implementation report
+# Task 02.3 — DropWatch rebranding report
 
-Date: 2026-10-23. Project: C:/Users/zeyros/Documents/repository/loot-tracker.
+## Summary
 
-## 1. Summary
+Loot Tracker is now DropWatch 0.3.0: Group Loot Tracker for Dungeons, Raids & Mythic+. Visible names, native frame identifiers, installation folder/TOC, texture paths and recommended commands use DropWatch. The validated detection modules and working v0.2.2 minimap positioning remain unchanged. No layout redesign or unrelated feature was added.
 
-Refined the existing interface: minimal native scrollbar, custom diagonal grip, original circular package/gear artwork, independently movable settings, readable fixed-opacity controls, and content-driven panel height. Added conservative account/Warband presentation filtering without rewriting the validated matching engine. Raw/observation/canonical evidence remains available. No Task 03 work.
+## Files modified or created
 
-## 2. Files created or modified
-
-- Assets/LootTracker.tga
+- Assets/DropWatch-Mini.png
+- Assets/DropWatch-Mini.svg
+- Assets/DropWatch-Mini.tga
+- Assets/DropWatch-Project.png
+- Assets/DropWatch-Project.svg
 - Assets/README.md
-- Assets/Settings.tga
 - Config/Settings.lua
+- Core/Events.lua
 - Core/Namespace.lua
-- LootTracker.toc
-- Modules/Loot.lua
-- Modules/Normalize.lua
-- Modules/Presentation.lua
-- Modules/Session.lua
+- DropWatch.toc
 - README.md
+- UI/Demo.lua
 - UI/Diagnostics.lua
-- UI/ItemRow.lua
 - UI/Main.lua
+- UI/Minimap.lua
 - UI/Notification.lua
 - UI/Settings.lua
-- UI/Style.lua
-- docs/API_REVIEW.md
-- docs/NORMALIZATION.md
+- docs/MIGRATION.md
+- docs/MINIMAP_FIX.md
 - docs/REPORT.md
+- docs/REPOSITORY_RENAME.md
 - docs/TESTING.md
 - docs/UI_ARCHITECTURE.md
 - docs/VALIDATION.txt
+- tests/branding.lua
 - tests/interface.lua
+- tests/minimap.lua
+- tests/packaging.py
 - tests/polish.lua
+- tests/refinement.lua
 - tests/run.py
 - tests/spec.lua
+- tools/build_icons.py
+- tools/package.py
 
-New runtime module: Modules/Presentation.lua. New assets: Assets/LootTracker.tga and Assets/Settings.tga, with format notes. New regression suite: tests/polish.lua. The remaining edits integrate these narrowly into existing modules and update release documentation. Recipient/context/parser matching algorithms remain unchanged.
+Removed/replaced legacy files:
+- Assets/LootTracker.tga
+- LootTracker.toc
 
-## 3. Scrollbar
+The local source remains in C:/Users/zeyros/Documents/repository/loot-tracker and retains its existing .git history. The source root now has DropWatch.toc. Packaging wraps it once in DropWatch/; the old TOC is not left as a second addon.
 
-Plain native ScrollFrame and vertical Slider, no arrow template on the main panel. Track/thumb width: 4 pixels, dark track, grey thumb, brighter hover. Native thumb/track input supplies dragging; wheel moves 51 pixels. Values map directly to scroll offsets. Thumb size follows viewport/content ratio with an 18-pixel floor, range clamps after content changes, and no overflow hides the control. The track ends above the 20-pixel grip and occupies a separate right gutter.
+## Icon assets
 
-## 4. Adaptive sizing
+Assets/DropWatch-Project.svg and 1024×1024 PNG provide detailed original project artwork: charcoal ground, teal radar circles/sweep, gold equipment shield and two detections. Assets/DropWatch-Mini.svg/PNG/TGA provide the simplified 64×64 variant with thick details and transparent circular corners. Main header and minimap load the new TGA through Interface/AddOns/DropWatch/Assets/DropWatch-Mini.tga. Settings.tga is unchanged. No arbitrary PNG/SVG game loading is assumed.
 
-Actual expanded height = min(preferredMaximum, max(128, 78 + contentHeight)). Content sums 48-pixel item rows, 36-pixel History headers and 3-pixel gaps, without a trailing gap. Default preferred maximum is 300, allowed preference 180–900; width stays entirely user-controlled, 360–1,000. Empty/one row: 128; three rows: 228; overflow: maximum with scrolling. Top-left pinning keeps the title stable while the panel grows downward. Expiration, tabs and group expansion/collapse invalidate layout. Mouse capture defers content/adaptive relayout until release. Manual resizing saves maximum and width; moving/closing/adaptation/minimize do not overwrite maximum.
+tools/build_icons.py generates both vector scenes and supersampled PNGs, then saves uncompressed 32-bit TGA through Pillow. All five generated files reproduce byte-for-byte with Pillow 12.3.0. The SVG sources are resolution-independent; the high-resolution export is suitable for future project listings. No artwork is uploaded. Local visual QA inspected 16/24/30/32px previews. WoW rendering remains untested for this rebrand.
 
-## 5. Settings and icons
+## SavedVariables migration
 
-Settings default to screen center, drag by their own title bar, clamp natively to screen bounds and persist validated settingsPosition separately from main/diagnostic geometry. Close and Escape remain available. The compact 320×340 layout keeps controls aligned. Header buttons share 22×20 dimensions and thin hover borders. Original TGA gear/package textures replace the letter S and bag. Minimap retains the prior corner positioning, visibility setting, tooltip and left/right actions, with a circular presentation and no library dependency.
+Legacy global names LootTrackerDB and LootTrackerSession intentionally remain declared. With WoW completely closed, copy the account SavedVariables/LootTracker.lua to DropWatch.lua unchanged, back up any existing new file, remove/move the old addon folder outside AddOns and install only DropWatch. Its loader preserves the same validated preference schema. No automatic access to the old filename, bridge addon or dual-active installation is claimed. Current-session history need not survive. See [the complete migration procedure](MIGRATION.md).
 
-## 6. Opacity
+## Commands and namespace
 
-Only main backdrop fill receives the configurable 20–100% value (default 88%). Equivalent native backdrop techniques keep border opacity independent. No parent SetAlpha is applied. Rows have fixed 90% fill, buttons 94%, settings 96%, and opaque text/icons/borders. Mocks explicitly verify 20/50/75/100%; real scenery/readability still requires the guide below.
+One DROPWATCH slash handler serves /dropwatch, /dw and legacy /loottracker, including settings/status/debug/diag/clear/demo/demo burst/demo off. The private namespace is still provided by addon varargs and now initializes for DropWatch. Native frames/Escape names use DropWatch consistently. No second event handler or parser was added. Interface 120105 is retained unchanged from the tested client.
 
-## 7. Warbound research
+## Automated results
 
-See [API review and primary client-source references](API_REVIEW.md). Implementation uses readable full-link item-binding queries plus runtime account-binding enums from sanitized GetItemInfo bindType. An inventory ItemLocation is never fabricated for another player. Confirmed link-specific binding proof survives later transient cache failures. Remote instance-specific trade timers/eligible players are unavailable to this model.
+644 assertions pass in the complete suite: prior 579, new branding/migration/alias 25, and TOC/path/artwork 40. All 19 manifest Lua modules compile/load in fresh Lua 5.1 VMs. Existing tests still cover loot detection, reconciliation, expiration, History, empty whisper actions, Warbound/unknown behavior, demo isolation and minimap position/scale. Migration tests load an unmodified legacy preference assignment, then initialize the new addon and verify dimensions, positions, modes, opacity, lock, mount preference and minimap settings.
 
-## 8. Bonus-roll research
+Additional release checks verify a single DropWatch/ root and 22 runtime files, byte-matching the source; only manifest, Lua modules and the two required game textures are installed. Documentation, tests, SVG/PNG source art, generators, .git metadata and caches are excluded. Scope audit confirms all engine modules/Core/Safe.lua are byte-identical and minimap code changes only name/art strings.
 
-Existing localized BONUS_ROLL formats can identify a bonus source. Reviewed event payloads provide no definitive trading eligibility. The addon therefore excludes a bonus item only when independent account-binding evidence confirms ineligibility. Other bonus items remain visible, including ordinary Soulbound awards. No extra award producer or speculative source correlation was added.
+## Package and in-game validation
 
-## 9. Presentation filtering
+Install DropWatch-0.3.0.zip. Source artwork/docs/tools remain separately available in the source folder. Follow [TESTING.md](TESTING.md), especially the focused Task 02.3 steps: migration with one active addon, title/version/commands, small-size radar rendering at your UI scale, minimap drag/reload/visibility, existing UI controls, genuine loot/History/expiry/whisper and diagnostic filtering. Capture client build, scale and screenshots/errors. Native texture rendering, file writes and slash registration cannot be certified by frame mocks.
 
-Visible(record) excludes only confirmed-ineligible records with confirmed classification and an exclusion reason. Runtime classification currently establishes this through account/Warband binding. Unknown and ordinary Soulbound equipment remain visible; no confirmed-tradeable state is introduced. Optional category/source/tradeability/confidence/reason/evidence strings are additive and survive whitelisted session snapshots. Same canonical ID updates in place after asynchronous classification. Both Recent/History and new-award displays use the filter; delayed exclusion retracts its outstanding notification contribution. Matching, recipients, complete links, grouping and independent 900-second expiry retain existing semantics.
+## GitHub rename
 
-## 10. Limitations
+Current origin remains https://github.com/MathisVkg/loot-tracker.git. Nothing was renamed/pushed remotely. Recommended optional target: https://github.com/MathisVkg/dropwatch.git after an administrator renames the repository in GitHub Settings; then update origin and any repository links/badges/workflows/project sites. The local directory may retain its old name. See [officially sourced steps and affected URLs](REPOSITORY_RENAME.md). No GitHub release or CurseForge publication is performed.
 
-Mock frames cannot certify visual rendering, native mouse capture, UI scaling, combat taint, tooltip/chat focus or actual item-specific API behavior. Link classification does not inspect a remote inventory instance. Missing/restricted data stays visible and gets bounded retry only when supported; unresolved binding is not continuously polled. Bonus source alone cannot prove non-tradeability, and some reward sources remain unknown. The existing fixed minimap corner anchor is preserved. Existing session/diagnostic caps and conservative reload lifecycle remain. No permanent multi-session database, automatic trades/whispers, upgrade advice, communication protocol, external runtime API or publication.
+## Known limits
 
-## 11. Automated validation
-
-255 assertions passed: baseline 62, refinement 66, interface/session 68, polish/filter 59. All 18 manifest Lua modules compile and load in fresh Lua 5.1 VMs through lupa 2.8. Requested scenarios 1–24 are covered, including both tabs, expansion/collapse, width/max-height persistence, independent settings, four opacity levels, minimized/notification states, top anchoring, Warbound/Soulbound/unknown/bonus behavior, retained diagnostics, delayed classification, deduplication and distinct recipients. Additional cases cover absent/error/secret APIs, missing runtime enums, no inherited arrows, cache retry and notification retraction. Two previous height assertions were updated for the intentional adaptive/max-preference semantics.
-
-## 12. Installable package
-
-LootTracker-0.2.1.zip contains a single LootTracker/ addon root with its manifest, runtime modules and original TGA assets, plus documentation/development tests. It carries no third-party runtime dependency. Previous release packages remain available. Extract into _retail_/Interface/AddOns and verify LootTracker/LootTracker.toc.
-
-## 13. In-game validation
-
-Follow [the detailed validation guide](TESTING.md), covering installation/version, overflow wheel and native dragging, resize/lock/outside release, stable downward adaptation, History collapse, exact 15-minute expiration, settings movement/reload, four opacity levels, minimap controls, real item links/whisper, two dungeon runs, genuine Warbound and bonus evidence, asynchronous updates, lifecycle recovery and combat/other-addon integration. Start with /loottracker demo, then turn demo off before genuine loot checks. Capture exact build/UI scale, steps/screenshots and original-link diagnostic evidence for feedback. The v0.2.1 client checks remain pending; wait for that feedback before any additional feature task.
+Manual preference-file transfer is necessary unless the correct file already exists. Missing old files use defaults. Do not load both versions together. Current-login history recovery across the rename is not promised. Existing event restrictions, conservative unknown tradeability, bounded history, uncertain run associations and circular-only minimap geometry remain. No positive tradeability prediction, automated messaging/trading, external service or synchronization was added. Task 03 has not begun; wait for client feedback.

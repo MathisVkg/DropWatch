@@ -1,18 +1,19 @@
 """Run with Python + lupa (development only); no addon runtime dependencies."""
 from pathlib import Path
+import runpy
 import math
 from lupa.lua51 import LuaRuntime
 
 root = Path(__file__).resolve().parents[1]
-files = [line.strip() for line in (root / "LootTracker.toc").read_text().splitlines()
+files = [line.strip() for line in (root / "DropWatch.toc").read_text().splitlines()
          if line.strip() and not line.startswith("#")]
-for suite, entry in [("spec.lua", "run_tests"), ("refinement.lua", "run_refinement"), ("interface.lua", "run_interface"), ("polish.lua", "run_polish"), ("minimap.lua", "run_minimap")]:
+for suite, entry in [("spec.lua", "run_tests"), ("refinement.lua", "run_refinement"), ("interface.lua", "run_interface"), ("polish.lua", "run_polish"), ("minimap.lua", "run_minimap"), ("branding.lua", "run_branding")]:
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.execute((root / "tests" / "spec.lua").read_text(encoding="utf-8"))
     ns = lua.table()
     for file in files:
         source = (root / file).read_text(encoding="utf-8")
-        lua.execute("return assert(loadstring(...))", source)("LootTracker", ns)
+        lua.execute("return assert(loadstring(...))", source)("DropWatch", ns)
     if suite != "spec.lua":
         lua.execute((root / "tests" / suite).read_text(encoding="utf-8"))
     lua.globals()[entry](ns)
@@ -27,9 +28,9 @@ for reload_ui in (False, True):
         lua.globals().Minimap.scale = scale
         ns = lua.table()
         for file in files:
-            lua.execute("return assert(loadstring(...))",(root/file).read_text(encoding="utf-8"))("LootTracker",ns)
+            lua.execute("return assert(loadstring(...))",(root/file).read_text(encoding="utf-8"))("DropWatch",ns)
         dispatch=ns.eventFrame.scripts.OnEvent
-        dispatch(ns.eventFrame,"ADDON_LOADED","LootTracker")
+        dispatch(ns.eventFrame,"ADDON_LOADED","DropWatch")
         dispatch(ns.eventFrame,"PLAYER_ENTERING_WORLD",not reload_ui,reload_ui)
         button=ns.Main.minimap
         point,relative,relative_point,x,y=button.GetPoint(button)
@@ -42,3 +43,4 @@ for reload_ui in (False, True):
         boot_assertions += 5
 print(f"PASS: {boot_assertions} fresh-login/reload minimap assertions")
 print(f"PASS: all {len(files)} manifest Lua files compile and load in Lua 5.1")
+runpy.run_path(str(root/"tests"/"packaging.py"))

@@ -13,7 +13,7 @@ function N:Dismiss()
     if self.frame then self.frame:Hide() end
 end
 function N:Label()
-    self.frame.label:SetText((ns.Session.demo and "DEMO · " or "") .. "Loot Tracker · " .. self.count .. " new item" .. (self.count==1 and "" or "s") .. "  ›")
+    self.frame.label:SetText((ns.Session.demo and "DEMO · " or "") .. "DropWatch · " .. self.count .. " new item" .. (self.count==1 and "" or "s") .. "  ›")
 end
 function N:Remove(id)
     if not self.ids[id] then return end

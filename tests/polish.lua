@@ -2,7 +2,7 @@ function run_polish(ns)
     local count=0
     local function check(v,m) count=count+1; assert(v,m) end
     local function event(name,...) ns.eventFrame.scripts.OnEvent(ns.eventFrame,name,...) end
-    event("ADDON_LOADED","LootTracker"); event("PLAYER_ENTERING_WORLD",true,false)
+    event("ADDON_LOADED","DropWatch"); event("PLAYER_ENTERING_WORLD",true,false)
     local M,H=ns.Main,ns.Session
     ns.db.displayMode="manual"
     local link="|cffa335ee|Hitem:123:0:0:0:0:0:0:0:80:0:0:2:1:2|h[Test Helm]|h|r"

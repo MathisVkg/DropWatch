@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 100 100">
+<rect width="100" height="100" rx="18" fill="#14191C"/>
+<circle cx="50" cy="50" r="43" fill="none" stroke="#58C4BD" stroke-width="4"/>
+<polygon points="50,50 50,11 69,16 82,27" fill="#203D3F"/>
+<polyline points="50,50 81,22" fill="none" stroke="#58C4BD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="50" cy="50" r="28" fill="none" stroke="#315C5D" stroke-width="1.6"/>
+<circle cx="50" cy="50" r="14" fill="none" stroke="#315C5D" stroke-width="1.4"/>
+<polyline points="85.0,50.0 91.0,50.0" fill="none" stroke="#58C4BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="50.0,85.0 50.0,91.0" fill="none" stroke="#58C4BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="15.0,50.00000000000001 9.0,50.00000000000001" fill="none" stroke="#58C4BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="49.99999999999999,15.0 49.99999999999999,9.0" fill="none" stroke="#58C4BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="27" cy="66" r="3" fill="#58C4BD" stroke="none" stroke-width="1"/>
+<circle cx="70" cy="68" r="2.5" fill="#58C4BD" stroke="none" stroke-width="1"/>
+<polygon points="47,43 65,43 65,56 56,66 47,56" fill="#DDAA55"/>
+<polygon points="51,47 61,47 61,54 56,60 51,54" fill="#14191C"/>
+</svg>

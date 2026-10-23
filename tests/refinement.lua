@@ -33,7 +33,7 @@ function run_refinement(ns)
     LOOT_ITEM_PUSHED_MULTIPLE="%s receives item: %sx%d."
     LOOT_ITEM_CREATED_SELF="You create: %s."
     LOOT_ITEM_CREATED_SELF_MULTIPLE="You create: %sx%d."
-    event("ADDON_LOADED","LootTracker")
+    event("ADDON_LOADED","DropWatch")
     local function reset()
         ns:Clear()
         state.instance,state.difficulty,state.activeMap,state.missingInstance=123,2,nil,false
@@ -240,7 +240,7 @@ function run_refinement(ns)
     reset()
     for i=1,205 do chat("Player"..i.."-RealmOne",helm) end
     check(#ns.raw==200 and #ns.records==200 and #ns.normalized==200,"all stores independently bounded")
-    SlashCmdList.LOOTTRACKER("diag")
+    SlashCmdList.DROPWATCH("diag")
     for i=1,5 do
         ns.UI.mode=i; ns.UI:Render()
         check(type(ns.UI.edit.text)=="string" and #ns.UI.edit.text>0,"diagnostic view "..i)

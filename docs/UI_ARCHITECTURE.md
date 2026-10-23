@@ -66,3 +66,9 @@ UI/Minimap.lua owns the existing custom button. Main retains its minimap referen
 Both frames inherit the same effective scale, so anchor offsets stay in map-local units. Dragging converts physical cursor pixels by Minimap:GetEffectiveScale(), subtracts Minimap:GetCenter(), and stores atan2 in degrees modulo 360. Saved settings validate finite readable numbers, normalize angles, and default to 45° without touching other preferences. Initial settings load is shared by reload and login.
 
 Only active drag uses OnUpdate. Drag-stop, left mouse-up, global outside release and hide stop it. A short release-click guard prevents the same drag gesture opening the panel. Native size/show hooks and UI_SCALE_CHANGED/DISPLAY_SIZE_CHANGED events recompute geometry. Artwork, right-click settings, visibility and tooltips are preserved; no icon library is added.
+
+## DropWatch 0.3.0 identity boundary
+
+The private namespace still comes from the addon's varargs, now loaded as DropWatch. Visible strings, native frame names, Escape registrations and texture paths use DropWatch consistently. The validated engine modules and minimap Position/Drag implementation are unchanged. Three native slash aliases share one DROPWATCH handler: /dropwatch, /dw and /loottracker. Settings continue using the documented legacy SavedVariables globals to support manual filename-copy migration without rewriting serialized data. There is one addon/event feed and no bridge loader.
+
+Main/minimap use Assets/DropWatch-Mini.tga; the settings gear remains Assets/Settings.tga. PNG/SVG source art is for development/project use, excluded from the runtime ZIP. See MIGRATION.md and Assets/README.md.

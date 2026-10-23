@@ -28,8 +28,10 @@ function ns:OnEvent(event, ...)
             local ok, result = pcall(frame.RegisterEvent, frame, wanted)
             self.registered[wanted] = ok and result ~= false and "registered" or "unavailable"
         end
-        SLASH_LOOTTRACKER1 = "/loottracker"
-        SlashCmdList.LOOTTRACKER = function(text)
+        SLASH_DROPWATCH1 = "/dropwatch"
+        SLASH_DROPWATCH2 = "/dw"
+        SLASH_DROPWATCH3 = "/loottracker"
+        SlashCmdList.DROPWATCH = function(text)
             local command = (text or ""):lower():match("^%s*(.-)%s*$")
             if command == "" then self.Main:Toggle()
             elseif command == "diag" then self.UI:Toggle()
@@ -43,9 +45,9 @@ function ns:OnEvent(event, ...)
                 self:Changed()
             elseif command == "clear" then self:Clear(); self:Print("Session history, recent loot and diagnostic records cleared.")
             elseif command == "status" then self:Status()
-            else self:Print("Commands: /loottracker [diag | settings | demo [off|burst] | debug | clear | status]") end
+            else self:Print("Commands: /dropwatch (aliases: /dw, /loottracker) [diag | settings | demo [off|burst] | debug | clear | status]") end
         end
-        self:Print("Loaded. /loottracker opens loot; /loottracker diag opens diagnostics.")
+        self:Print("Loaded. /dropwatch opens loot; /dropwatch diag opens diagnostics.")
         return
     end
     if not self.db then return end

@@ -17,7 +17,7 @@ function P:Refresh()
 end
 function P:Create()
     if self.frame then return end
-    local f=CreateFrame("Frame","LootTrackerSettingsFrame",UIParent,"BackdropTemplate")
+    local f=CreateFrame("Frame","DropWatchSettingsFrame",UIParent,"BackdropTemplate")
     self.frame=f; f:SetSize(320,340); local p=ns.db.settingsPosition; f:SetPoint(p.point,UIParent,p.relativePoint,p.x,p.y); f:SetMovable(true); f:SetClampedToScreen(true); f:SetFrameStrata("DIALOG"); T.Backdrop(f)
     self.bar=CreateFrame("Button",nil,f)
     self.bar:SetPoint("TOPLEFT",1,-1); self.bar:SetPoint("TOPRIGHT",-32,-1); self.bar:SetHeight(30)
@@ -28,7 +28,7 @@ function P:Create()
         local point,_,relativePoint,x,y=f:GetPoint()
         ns.db.settingsPosition={point=point,relativePoint=relativePoint,x=x,y=y}
     end)
-    local title=T.Text(self.bar,12); title:SetPoint("TOPLEFT",12,-12); title:SetText("Loot Tracker · Settings")
+    local title=T.Text(self.bar,12); title:SetPoint("TOPLEFT",12,-12); title:SetText("DropWatch · Settings")
     local close=T.Button(f,"×",22,20,function() f:Hide() end); close:SetPoint("TOPRIGHT",-6,-6)
     local label=T.Text(f,11); label:SetPoint("TOPLEFT",12,-45); label:SetText("Display behavior")
     self.modes={}
@@ -54,7 +54,7 @@ function P:Create()
         ns.db.window={point="CENTER",relativePoint="CENTER",x=0,y=0,width=420,height=300}
         ns.Main:ApplySettings(true)
     end); reset:SetPoint("TOPLEFT",12,-306)
-    UISpecialFrames[#UISpecialFrames+1]="LootTrackerSettingsFrame"
+    UISpecialFrames[#UISpecialFrames+1]="DropWatchSettingsFrame"
     f:Hide(); self:Refresh()
 end
 function P:Toggle()

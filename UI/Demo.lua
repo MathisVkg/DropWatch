@@ -20,7 +20,7 @@ function D:Start()
     ns.Session.demo=true; ns.Session.demoEntries={}
     for i=1,6 do ns.Session.demoEntries[#ns.Session.demoEntries+1]=self:Item(i<=4 and 1 or 2,i,i<=4 and 3 or 1100) end
     ns.Session:Changed(); ns.Session:ScheduleExpiry(); ns.Main:NewAward(4)
-    ns:Print("DEMO enabled: simulated records, placeholder items, whispers disabled. /loottracker demo off restores real loot; demo burst adds simulated drops.")
+    ns:Print("DEMO enabled: simulated records, placeholder items, whispers disabled. /dropwatch demo off restores real loot; demo burst adds simulated drops.")
 end
 function D:Stop()
     ns.Session.demo,ns.Session.demoEntries=nil,nil

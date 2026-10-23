@@ -17,7 +17,7 @@ end
 function U:Render()
     if not self.frame or not self.frame:IsShown() then return end
     local list = self.mode == 1 and ns.raw or (self.mode == 2 and ns.records or ns.normalized)
-    local lines = { "Loot Tracker " .. ns.version .. " | debug=" .. tostring(ns.db.debug) ..
+    local lines = { "DropWatch " .. ns.version .. " | debug=" .. tostring(ns.db.debug) ..
         " | raw=" .. #ns.raw .. " | observations=" .. #ns.records .. " | normalized=" .. #ns.normalized,
         "Session counters: " .. S.Dump(ns.counters, 1),
         "Select text to copy. '?' means unavailable. Data is session-only. Newest first.", "" }
@@ -65,7 +65,7 @@ function U:Render()
 end
 function U:Create()
     if self.frame then return end
-    local f = CreateFrame("Frame", "LootTrackerDiagnosticFrame", UIParent, "BackdropTemplate")
+    local f = CreateFrame("Frame", "DropWatchDiagnosticFrame", UIParent, "BackdropTemplate")
     self.frame = f
     f:SetSize(880, 520)
     f:SetClampedToScreen(true)
@@ -85,7 +85,7 @@ function U:Create()
     end)
     local title = f:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     title:SetPoint("TOPLEFT", 16, -15)
-    title:SetText("Loot Tracker - diagnostic prototype")
+    title:SetText("DropWatch - diagnostic prototype")
     local close = CreateFrame("Button", nil, f, "UIPanelCloseButton")
     close:SetPoint("TOPRIGHT", -3, -3)
     local mode = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
@@ -101,7 +101,7 @@ function U:Create()
     end)
     local hint = f:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     hint:SetPoint("LEFT", mode, "RIGHT", 12, 0)
-    hint:SetText("Drag background to move | /loottracker clear | /loottracker debug")
+    hint:SetText("Drag background to move | /dropwatch clear | /dropwatch debug")
     local scroll = CreateFrame("ScrollFrame", nil, f, "UIPanelScrollFrameTemplate")
     scroll:SetPoint("TOPLEFT", 16, -78)
     scroll:SetPoint("BOTTOMRIGHT", -34, 16)
@@ -114,7 +114,7 @@ function U:Create()
     edit:SetScript("OnEscapePressed", function(box) box:ClearFocus(); f:Hide() end)
     scroll:SetScrollChild(edit)
     f:SetScript("OnShow", function() self.dirty=true; self:Render() end)
-    UISpecialFrames[#UISpecialFrames+1] = "LootTrackerDiagnosticFrame"
+    UISpecialFrames[#UISpecialFrames+1] = "DropWatchDiagnosticFrame"
     f:Hide()
 end
 function U:Toggle()

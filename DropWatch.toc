@@ -1,8 +1,8 @@
 ## Interface: 120105
-## Title: Loot Tracker
-## Notes: Recent group loot, session history and native whisper shortcuts
-## Author: Loot Tracker contributors
-## Version: 0.2.2
+## Title: DropWatch
+## Notes: Group Loot Tracker for Dungeons, Raids & Mythic+
+## Author: DropWatch contributors
+## Version: 0.3.0
 ## SavedVariables: LootTrackerDB, LootTrackerSession
 
 Core/Namespace.lua

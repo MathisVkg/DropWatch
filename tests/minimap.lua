@@ -3,11 +3,11 @@ function run_minimap(ns)
     local function check(value,message) checks=checks+1; assert(value,message) end
     local function close(a,b) return math.abs(a-b)<0.000001 end
     local function event(name,...) ns.eventFrame.scripts.OnEvent(ns.eventFrame,name,...) end
-    event("ADDON_LOADED","LootTracker"); event("PLAYER_ENTERING_WORLD",true,false)
+    event("ADDON_LOADED","DropWatch"); event("PLAYER_ENTERING_WORLD",true,false)
     local B,button=ns.Minimap,ns.Main.minimap
     check(B.button==button and button.parent==Minimap,"button is parented to actual Minimap")
     check(ns.db.minimapAngle==45,"upgrade default angle is upper-right 45 degrees")
-    check(button.icon.texture=="Interface/AddOns/LootTracker/Assets/LootTracker.tga","custom artwork preserved")
+    check(button.icon.texture=="Interface/AddOns/DropWatch/Assets/DropWatch-Mini.tga","custom artwork preserved")
     local function position(angle)
         ns.db.minimapAngle=angle; B:Position()
         local p={button:GetPoint()}

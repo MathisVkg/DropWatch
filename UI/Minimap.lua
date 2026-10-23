@@ -49,7 +49,7 @@ function B:Initialize()
     button:RegisterForClicks("LeftButtonUp","RightButtonUp")
     button:RegisterForDrag("LeftButton")
     button.icon=button:CreateTexture(nil,"ARTWORK"); button.icon:SetAllPoints()
-    button.icon:SetTexture("Interface/AddOns/LootTracker/Assets/LootTracker.tga")
+    button.icon:SetTexture("Interface/AddOns/DropWatch/Assets/DropWatch-Mini.tga")
     button:SetScript("OnClick",function(_,mouse)
         if button.dragging or (button.suppressUntil and GetTime()<button.suppressUntil) then return end
         if mouse=="RightButton" then ns.Settings:Toggle() else ns.Main:Toggle() end
@@ -57,7 +57,7 @@ function B:Initialize()
     button:SetScript("OnEnter",function(b)
         if not button.dragging and GameTooltip then
             GameTooltip:SetOwner(b,"ANCHOR_LEFT")
-            GameTooltip:SetText([[Loot Tracker
+            GameTooltip:SetText([[DropWatch
 Left-click: panel
 Right-click: settings
 Drag: move around minimap]])

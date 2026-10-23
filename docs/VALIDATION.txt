@@ -1,17 +1,20 @@
-Loot Tracker 0.2.2 — Task 02.2 minimap positioning
+DropWatch 0.3.0 — Task 02.3 rebranding
 PASS: 62 baseline detection assertions
 PASS: 66 normalization/refinement assertions
 PASS: 68 interface/session assertions
 PASS: 59 UI polish/filter assertions
 PASS: 294 minimap geometry/drag assertions
-PASS: 30 fresh-VM login/reload restoration assertions
-TOTAL: 579 assertions
-PASS: 19 manifest Lua modules compile and load in fresh Lua 5.1 VMs
-Runtime: Python + lupa 2.8, mocked WoW/native frame APIs
-Minimap cases: sizes 120/150/240, effective scales 0.64/1/1.5,
-orbit and drag quadrants, button dimensions, resize/show/scale/display events,
-normalized/invalid/secret saved angles, outside release, hide/show interruption,
-ordinary clicks/tooltips and no idle polling.
-Existing custom TGA assets are unchanged.
-Real-client visual/mouse/security validation: pending; see TESTING.md.
-No unrelated features or Task 03 work.
+PASS: 30 fresh-VM login/reload assertions
+PASS: 25 rebranding/migration/slash assertions
+PASS: 40 manifest/path/artwork assertions
+TOTAL: 644 assertions
+PASS: all 19 Lua manifest modules compile/load in Lua 5.1 through lupa 2.8
+PASS: original engine modules and Core/Safe.lua remain byte-identical
+PASS: minimap implementation changes only visible brand and texture path
+PASS: all five radar artwork files rebuild byte-for-byte with Python/Pillow 12.3.0
+PASS: artwork preview inspected at 16/24/30/32px and project size
+PASS: runtime-only ZIP has 22 files and a single DropWatch/ root, with no docs/tests/caches/Git metadata
+SavedVariables: manual filename-copy migration tested using unmodified legacy global data.
+Client interface 120105 unchanged from validated v0.2.2.
+In-game radar rendering, native slash dispatch and SavedVariables disk migration remain pending.
+No remote rename, commit-history rewrite, release publication or Task 03.

@@ -37,7 +37,7 @@ function M:ApplySettings(reset)
 end
 function M:Create()
     if self.frame then return end
-    local f=CreateFrame("Frame","LootTrackerMainFrame",UIParent,"BackdropTemplate")
+    local f=CreateFrame("Frame","DropWatchMainFrame",UIParent,"BackdropTemplate")
     self.frame=f; T.Backdrop(f,ns.db.opacity); f:SetFrameStrata("DIALOG"); f:SetClampedToScreen(true)
     local p=ns.db.window
     f:SetResizeBounds(360,128,1000,900); f:SetSize(p.width,p.height); f:SetPoint(p.point,UIParent,p.relativePoint,p.x,p.y)
@@ -47,16 +47,16 @@ function M:Create()
     bar:SetScript("OnDragStart",function() if not ns.db.locked then self.interacting="move"; f:StartMoving() end end)
     bar:SetScript("OnDragStop",function() f:StopMovingOrSizing(); self.interacting=nil; self:SaveWindow(); self:Render() end)
     bar:SetScript("OnClick",function() if self.minimized then self:Minimize(false) end end)
-    local icon=bar:CreateTexture(nil,"ARTWORK"); icon:SetSize(16,16); icon:SetPoint("LEFT",8,0); icon:SetTexture("Interface/AddOns/LootTracker/Assets/LootTracker.tga")
-    self.title=T.Text(bar,12); self.title:SetPoint("LEFT",icon,"RIGHT",7,0); self.title:SetText("Loot Tracker")
+    local icon=bar:CreateTexture(nil,"ARTWORK"); icon:SetSize(16,16); icon:SetPoint("LEFT",8,0); icon:SetTexture("Interface/AddOns/DropWatch/Assets/DropWatch-Mini.tga")
+    self.title=T.Text(bar,12); self.title:SetPoint("LEFT",icon,"RIGHT",7,0); self.title:SetText("DropWatch")
     local close=T.Button(bar,"×",22,20,function() self:Close() end); close:SetPoint("RIGHT",-5,0)
     self.minimize=T.Button(bar,"−",22,20,function() self:Minimize(not self.minimized) end); self.minimize:SetPoint("RIGHT",close,"LEFT",-3,0)
     local settings=T.Button(bar,"⚙",22,20,function() ns.Settings:Toggle() end); settings:SetPoint("RIGHT",self.minimize,"LEFT",-3,0)
     settings.label:SetText("")
     settings.icon=settings:CreateTexture(nil,"ARTWORK"); settings.icon:SetSize(14,14); settings.icon:SetPoint("CENTER")
-    settings.icon:SetTexture("Interface/AddOns/LootTracker/Assets/Settings.tga")
+    settings.icon:SetTexture("Interface/AddOns/DropWatch/Assets/Settings.tga")
     settings:SetScript("OnEnter",function(b)
-        b:SetBackdropBorderColor(unpack(T.accent)); if GameTooltip then GameTooltip:SetOwner(b,"ANCHOR_RIGHT"); GameTooltip:SetText("Loot Tracker settings"); GameTooltip:Show() end
+        b:SetBackdropBorderColor(unpack(T.accent)); if GameTooltip then GameTooltip:SetOwner(b,"ANCHOR_RIGHT"); GameTooltip:SetText("DropWatch settings"); GameTooltip:Show() end
     end)
     settings:SetScript("OnLeave",function(b) b:SetBackdropBorderColor(0.24,0.27,0.29,1); if GameTooltip then GameTooltip:Hide() end end)
     self.tabs=CreateFrame("Frame",nil,f); self.tabs:SetPoint("TOPLEFT",8,-34); self.tabs:SetPoint("TOPRIGHT",-8,-34); self.tabs:SetHeight(24)
@@ -109,7 +109,7 @@ function M:Create()
     end)
     f:SetScript("OnSizeChanged",function() self.dirty=true end)
     f:SetScript("OnShow",function() self.dirty=true; self:Render() end)
-    UISpecialFrames[#UISpecialFrames+1]="LootTrackerMainFrame"
+    UISpecialFrames[#UISpecialFrames+1]="DropWatchMainFrame"
     f:Hide(); self:ApplySettings()
 end
 function M:SetTab(tab)
@@ -193,7 +193,7 @@ end
 function M:Render()
     if not self.frame or not self.frame:IsShown() then return end
     if self.interacting then self.dirty=true; return end
-    self.title:SetText(ns.Session.demo and "Loot Tracker · DEMO" or "Loot Tracker")
+    self.title:SetText(ns.Session.demo and "DropWatch · DEMO" or "DropWatch")
     if self.minimized then self.scrollbar:Hide(); self.dirty=false; return end
     T.Active(self.lootTab,self.tab=="loot"); T.Active(self.historyTab,self.tab=="history")
     self.demoLabel:SetText(ns.Session.demo and "SIMULATED" or "")

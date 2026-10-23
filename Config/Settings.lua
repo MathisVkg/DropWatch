@@ -1,5 +1,6 @@
 local _, ns = ...
 function ns:LoadSettings()
+    -- Deliberately retain legacy global names; see docs/MIGRATION.md for the file-copy upgrade.
     local old = type(LootTrackerDB) == "table" and LootTrackerDB or {}
     -- Rebuild the saved table: records and arbitrary old fields never persist.
     self.db = {

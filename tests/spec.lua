@@ -112,7 +112,7 @@ function run_tests(ns)
     local P, S = ns.Parser, ns.Safe
     local link = "|cffa335ee|Hitem:123:0:0:0:0:0:0:0:80:0:0:2:1:2|h[Test Helm]|h|r"
     local function event(name, ...) ns.eventFrame.scripts.OnEvent(ns.eventFrame, name, ...) end
-    event("ADDON_LOADED", "LootTracker")
+    event("ADDON_LOADED", "DropWatch")
     check(ns.db.debug == false and ns.db.maxRecords == 200, "settings defaults")
     for _, name in ipairs(ns.events) do check(ns.registered[name] == "registered", "registration " .. name) end
     check(P.Links("prefix "..link.." suffix")[1] == link, "preserve complete hyperlink")
@@ -184,13 +184,13 @@ function run_tests(ns)
     check(#ns.records==before, "reward summary not fabricated as awards")
     event("PLAYER_ENTERING_WORLD",false,true)
     check(ns.Context:Snapshot().challenge==nil, "world transition clears context")
-    SlashCmdList.LOOTTRACKER("diag")
+    SlashCmdList.DROPWATCH("diag")
     check(ns.UI.frame:IsShown(), "window opens")
-    SlashCmdList.LOOTTRACKER("diag")
+    SlashCmdList.DROPWATCH("diag")
     check(not ns.UI.frame:IsShown(), "window closes")
-    SlashCmdList.LOOTTRACKER("debug")
+    SlashCmdList.DROPWATCH("debug")
     check(ns.db.debug, "debug toggles")
-    SlashCmdList.LOOTTRACKER("status")
+    SlashCmdList.DROPWATCH("status")
     check(#messages>10, "status feedback")
     for i=1,220 do event("PLAYER_ENTERING_WORLD",false,true) end
     check(#ns.raw==200 and #ns.records<=200, "bounded records")
@@ -207,7 +207,7 @@ function run_tests(ns)
     C_Item.GetItemInfo=savedQuery
     event("CHAT_MSG_LOOT",nil,nil)
     check(ns.records[#ns.records].status=="unprocessed: no readable item ID", "nil payload retained")
-    SlashCmdList.LOOTTRACKER("clear")
+    SlashCmdList.DROPWATCH("clear")
     check(#ns.raw==0 and #ns.records==0, "clear")
     ns.db.position={point="CENTER",relativePoint="CENTER",x=10,y=20}
     ns:LoadSettings()
