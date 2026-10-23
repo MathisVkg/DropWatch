@@ -1,0 +1,13 @@
+# Development outputs only; runtime source/artwork stay tracked.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+*.zip
+*.sha256
+*.manifest.json
+Thumbs.db
+.DS_Store

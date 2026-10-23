@@ -1,13 +1,15 @@
 """Run with Python + lupa (development only); no addon runtime dependencies."""
 from pathlib import Path
 import runpy
+import sys
+sys.dont_write_bytecode=True
 import math
 from lupa.lua51 import LuaRuntime
 
 root = Path(__file__).resolve().parents[1]
 files = [line.strip() for line in (root / "DropWatch.toc").read_text().splitlines()
          if line.strip() and not line.startswith("#")]
-for suite, entry in [("spec.lua", "run_tests"), ("refinement.lua", "run_refinement"), ("interface.lua", "run_interface"), ("polish.lua", "run_polish"), ("minimap.lua", "run_minimap"), ("branding.lua", "run_branding")]:
+for suite, entry in [("spec.lua", "run_tests"), ("refinement.lua", "run_refinement"), ("interface.lua", "run_interface"), ("polish.lua", "run_polish"), ("minimap.lua", "run_minimap"), ("branding.lua", "run_branding"), ("release.lua", "run_release")]:
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.execute((root / "tests" / "spec.lua").read_text(encoding="utf-8"))
     ns = lua.table()
@@ -44,3 +46,4 @@ for reload_ui in (False, True):
 print(f"PASS: {boot_assertions} fresh-login/reload minimap assertions")
 print(f"PASS: all {len(files)} manifest Lua files compile and load in Lua 5.1")
 runpy.run_path(str(root/"tests"/"packaging.py"))
+runpy.run_path(str(root/"tests"/"release_packaging.py"))

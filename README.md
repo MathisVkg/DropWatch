@@ -1,5 +1,7 @@
 # DropWatch — v0.3.0
 
+**Local release candidate — not published.** Start with [release readiness](docs/REPORT.md), [manual validation](docs/RELEASE_VALIDATION.md) and the [CurseForge author checklist](docs/CURSEFORGE_RELEASE_CHECKLIST.md). License selection and real gameplay screenshots are pending owner action.
+
 **Group Loot Tracker for Dungeons, Raids & Mythic+**
 
 Automatically track equipment received by group members, review recent drops, and quickly whisper other players.
@@ -56,7 +58,7 @@ History contains at most 1,000 lightweight snapshots for the current login sessi
 
 Event visibility, secret/restricted data, item cache availability and remote-instance trading rules limit classification. Unknown values stay unknown. Links cannot expose another player's individual trading timer or eligible-player list. Activity assignments remain conservative when run boundaries are unclear. Square/custom minimap skins are outside the circular-border positioning model.
 
-The existing engine/UI was client-tested before this rebrand. **New DropWatch texture rendering, alias registration and file migration require in-game validation.** Mock tests cannot certify client rendering, combat taint, native cursor capture or chat focus. No automatic trade/whisper, upgrade recommendation, permanent history, synchronization or publication is added.
+The user reports successful Mythic+ detection, recipient identification, deduplication, expiration, History, Warbound exclusion, main rendering, minimap positioning and DropWatch branding. **Raid-specific testing and final validation of this exact hardened candidate remain incomplete.** Mock tests cannot certify client rendering, combat taint, native cursor capture or chat focus. No automatic trade/whisper, upgrade recommendation, permanent history, synchronization or publication is added.
 
 ## Development and artwork
 
@@ -64,4 +66,12 @@ Run python tests/run.py with lupa 2.8 (Lua 5.1 backend). Rebuild original SVG/PN
 
 The [1024px project icon](Assets/DropWatch-Project.png) and [vector source](Assets/DropWatch-Project.svg) use charcoal, teal radar circles/sweep and a gold equipment shield. The [simplified minimap variant](Assets/DropWatch-Mini.png) has thick details for small sizes; only its uncompressed 32-bit TGA is loaded in game. See [asset build notes](Assets/README.md).
 
-Read [validation](docs/TESTING.md), [architecture](docs/UI_ARCHITECTURE.md), [API review](docs/API_REVIEW.md), [rebrand report](docs/REPORT.md) and [optional GitHub rename instructions](docs/REPOSITORY_RENAME.md). The local repository and remote are unchanged; no release was published. Task 03 awaits feedback.
+Read [validation](docs/TESTING.md), [architecture](docs/UI_ARCHITECTURE.md), [API review](docs/API_REVIEW.md), [rebrand report](docs/REPORT.md) and [optional GitHub rename instructions](docs/REPOSITORY_RENAME.md). The local repository and remote are unchanged; no release was published. Release preparation is complete; publication awaits owner approval.
+
+## Release resources
+
+See [CHANGELOG.md](CHANGELOG.md), [deterministic build instructions](docs/BUILD_RELEASE.md), [CurseForge description](docs/CURSEFORGE_DESCRIPTION.md), [release notes](docs/CURSEFORGE_RELEASE_NOTES.md), [release assets](docs/RELEASE_ASSETS.md), [license options](docs/LICENSE_REVIEW.md), [privacy review](docs/SECURITY_PRIVACY_REVIEW.md), [compatibility audit](docs/COMPATIBILITY_AUDIT.md) and [GitHub preparation](docs/GITHUB_RELEASE.md).
+
+No LICENSE file is present and none was chosen automatically. MIT is the review recommendation, subject to owner approval; see the comparison before adopting terms.
+
+For support, the configured repository issue URL is https://github.com/MathisVkg/loot-tracker/issues. Confirm public access and Issues before publishing it. Include addon/client versions, UI scale, reproduction steps and carefully reviewed/redacted diagnostics; logs never upload automatically.

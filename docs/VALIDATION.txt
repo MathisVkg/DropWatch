@@ -1,4 +1,4 @@
-DropWatch 0.3.0 — Task 02.3 rebranding
+DropWatch 0.3.0 — Task 03 release-candidate preparation
 PASS: 62 baseline detection assertions
 PASS: 66 normalization/refinement assertions
 PASS: 68 interface/session assertions
@@ -7,14 +7,15 @@ PASS: 294 minimap geometry/drag assertions
 PASS: 30 fresh-VM login/reload assertions
 PASS: 25 rebranding/migration/slash assertions
 PASS: 40 manifest/path/artwork assertions
-TOTAL: 644 assertions
-PASS: all 19 Lua manifest modules compile/load in Lua 5.1 through lupa 2.8
-PASS: original engine modules and Core/Safe.lua remain byte-identical
-PASS: minimap implementation changes only visible brand and texture path
-PASS: all five radar artwork files rebuild byte-for-byte with Python/Pillow 12.3.0
-PASS: artwork preview inspected at 16/24/30/32px and project size
-PASS: runtime-only ZIP has 22 files and a single DropWatch/ root, with no docs/tests/caches/Git metadata
-SavedVariables: manual filename-copy migration tested using unmodified legacy global data.
-Client interface 120105 unchanged from validated v0.2.2.
-In-game radar rendering, native slash dispatch and SavedVariables disk migration remain pending.
-No remote rename, commit-history rewrite, release publication or Task 03.
+PASS: 13 release stability assertions
+PASS: 173 deterministic-release/security assertions
+TOTAL: 830 assertions, no unresolved test failures
+PASS: all 19 runtime modules compile/load in Lua 5.1 through lupa 2.8
+PASS: clean installed ZIP boot with mock native APIs; exact payload/CRC/root checks
+PASS: deterministic archive despite changed source mtimes; fixed ZIP metadata
+PASS: 22 runtime files; checksums and manifest outside archive
+Candidate version 0.3.0/interface 120105 unchanged.
+Pinned source audit: Gethe e7aa82019dc298e0351c7159d60c2a9b916b9b67, 12.1.5 (70529).
+User-reported gameplay successes are recorded separately in RELEASE_VALIDATION.md.
+Exact candidate smoke/raid checks, real screenshots, public support access and license approval remain pending.
+No license was chosen. No tag, commit, push, project submission or publication performed.

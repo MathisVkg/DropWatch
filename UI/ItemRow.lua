@@ -42,7 +42,9 @@ function Row:Create(parent)
     row.item:SetScript("OnEnter",function(button)
         local record=row.record; local link=record and T.Link(record)
         if link and GameTooltip then
-            GameTooltip:SetOwner(button,"ANCHOR_RIGHT"); pcall(GameTooltip.SetHyperlink,GameTooltip,link); GameTooltip:Show()
+            GameTooltip:SetOwner(button,"ANCHOR_RIGHT")
+            local ok=pcall(GameTooltip.SetHyperlink,GameTooltip,link)
+            if ok then GameTooltip:Show() else GameTooltip:Hide() end
         end
     end)
     row.item:SetScript("OnLeave",function() if GameTooltip then GameTooltip:Hide() end end)

@@ -55,6 +55,7 @@ function H:Put(record,announce)
             for i,entry in ipairs(self.entries) do if entry.timestamp<self.entries[oldestIndex].timestamp then oldestIndex=i end end
             local oldest=table.remove(self.entries,oldestIndex)
             self.byID[oldest.id]=nil
+            if ns.Notification then ns.Notification:Remove(oldest.id) end
         end
         if announce and self.ready and not self.demo and self:Qualifies(snapshot) and snapshot.timestamp+self.retention>time() then
             ns.Main:NewAward(1,snapshot.id)
@@ -64,6 +65,7 @@ function H:Put(record,announce)
     if not self.restoring then self:ScheduleExpiry() end
 end
 function H:Remove(id)
+    if ns.Notification then ns.Notification:Remove(id) end
     if not self.byID[id] then return end
     self.byID[id]=nil
     for i,entry in ipairs(self.entries) do if entry.id==id then table.remove(self.entries,i); break end end

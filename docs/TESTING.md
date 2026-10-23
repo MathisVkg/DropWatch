@@ -75,3 +75,7 @@ Automated v0.2.2 coverage adds a minimap geometry/drag suite plus six fresh-VM l
 7. Capture addon/client version, UI scale, screenshot for icon issues and diagnostic evidence for loot issues. Real-client rendering, Lua SavedVariables file loading/writes and native slash dispatch are not certified by mocks.
 
 The install ZIP intentionally omits this documentation and development sources. Get them from the source tree. The source has detailed project/minimap artwork and reproducible build tools. Do not publish to GitHub Releases or CurseForge as part of validation.
+
+## Release-candidate sign-off
+
+Use [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md) as the final 20-case sign-off matrix. Prior user-reported successes are distinguished from tests not yet performed on this exact hardened 0.3.0 ZIP; raid coverage remains incomplete. No publication is performed by the build/test scripts.

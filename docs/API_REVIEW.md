@@ -63,3 +63,7 @@ True account-binding evidence excludes. False, nil, secret values, API absence a
 BONUS_ROLL_RESULT includes item link/quantity, specialization, sex, personalLootToast, optional currency, secondary-result and corruption information; it has no tradeability field. Toast flags do not establish eligibility. Existing localized BONUS_ROLL chat formats identify source; the event is not added as another award producer. Bonus source alone stays visible; confirmed account-bound bonus equipment is excluded. No inference uses timing, item level, rarity, Soulbound status or Mythic+ completion.
 
 Tooltip binding text can reflect localization, cache/restrictions and player-specific instance state. It is not a classification fallback. Definitions verify signatures, not real-client rendering/security or item-specific semantics; test genuine awards in game.
+
+## Task 03 pinned release audit
+
+See [COMPATIBILITY_AUDIT.md](COMPATIBILITY_AUDIT.md) for the 12.1.5 build 70529 source snapshot, all registered event definitions, unchanged interface 120105, current chat/tooltip helpers, recipient-label discrepancy, SavedVariables restrictions and client validation gaps. No future patch or complete raid claim is made.

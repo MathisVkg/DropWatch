@@ -1,80 +1,83 @@
-# Task 02.3 — DropWatch rebranding report
+# Task 03 — release readiness report
 
-## Summary
+## Assessment
 
-Loot Tracker is now DropWatch 0.3.0: Group Loot Tracker for Dungeons, Raids & Mythic+. Visible names, native frame identifiers, installation folder/TOC, texture paths and recommended commands use DropWatch. The validated detection modules and working v0.2.2 minimap positioning remain unchanged. No layout redesign or unrelated feature was added.
+**DropWatch 0.3.0 is prepared for owner review as a local release candidate. It is not cleared for automatic public release.** Technical checks pass; remaining owner actions are license selection/approval, real game screenshots, exact-candidate manual validation and verification of public source/issue access. Raid-specific coverage remains incomplete and must be tested or explicitly accepted/disclosed. No publication occurred.
+
+Version 0.3.0 and interface 120105 are unchanged. Candidate folder naming outside the ZIP is an artifact label, not an addon version bump.
+
+## Changes
+
+- Bounded continuous compact-notification tracking by retracting session-capacity evictions.
+- Retracted notification contributions when delayed classification removes a record.
+- Hid stale native tooltip content after failed hyperlink lookup.
+- Made packaging deterministic with fixed ZIP metadata, CRC/payload checks, SHA256 and per-file manifests.
+- Added release regressions, clean-ZIP mocked boot, .gitignore, issue template and 400px project PNG.
+- Prepared CurseForge/GitHub descriptions, changelog, licensing comparison, asset inventory, privacy/API audits, author checklist and final manual plan.
+
+No validated recipient/reconciliation/binding rules, UI layout, minimap geometry, expiry duration or new feature was changed. Diagnostics/demo remain intentional runtime tools; no dead runtime module, redundant third-party runtime library or unrelated installed file was found.
 
 ## Files modified or created
 
-- Assets/DropWatch-Mini.png
-- Assets/DropWatch-Mini.svg
-- Assets/DropWatch-Mini.tga
-- Assets/DropWatch-Project.png
-- Assets/DropWatch-Project.svg
+- .github/ISSUE_TEMPLATE/bug_report.md
+- .gitignore
+- Assets/DropWatch-CurseForge.png
 - Assets/README.md
-- Config/Settings.lua
-- Core/Events.lua
-- Core/Namespace.lua
-- DropWatch.toc
+- CHANGELOG.md
+- Modules/Session.lua
 - README.md
-- UI/Demo.lua
-- UI/Diagnostics.lua
-- UI/Main.lua
-- UI/Minimap.lua
-- UI/Notification.lua
-- UI/Settings.lua
-- docs/MIGRATION.md
-- docs/MINIMAP_FIX.md
+- UI/ItemRow.lua
+- docs/API_REVIEW.md
+- docs/BUILD_RELEASE.md
+- docs/CODE_REVIEW.md
+- docs/COMPATIBILITY_AUDIT.md
+- docs/CURSEFORGE_DESCRIPTION.md
+- docs/CURSEFORGE_RELEASE_CHECKLIST.md
+- docs/CURSEFORGE_RELEASE_NOTES.md
+- docs/GITHUB_RELEASE.md
+- docs/LICENSE_REVIEW.md
+- docs/RELEASE_ASSETS.md
+- docs/RELEASE_VALIDATION.md
 - docs/REPORT.md
-- docs/REPOSITORY_RENAME.md
+- docs/SECURITY_PRIVACY_REVIEW.md
 - docs/TESTING.md
 - docs/UI_ARCHITECTURE.md
 - docs/VALIDATION.txt
-- tests/branding.lua
-- tests/interface.lua
-- tests/minimap.lua
-- tests/packaging.py
-- tests/polish.lua
-- tests/refinement.lua
+- tests/release.lua
+- tests/release_packaging.py
 - tests/run.py
-- tests/spec.lua
 - tools/build_icons.py
 - tools/package.py
 
-Removed/replaced legacy files:
-- Assets/LootTracker.tga
-- LootTracker.toc
+## Tests and package
 
-The local source remains in C:/Users/zeyros/Documents/repository/loot-tracker and retains its existing .git history. The source root now has DropWatch.toc. Packaging wraps it once in DropWatch/; the old TOC is not left as a second addon.
+**830 assertions pass**, preserving all 644 previous assertions and adding 13 stability plus 173 release/security checks. All 19 runtime modules compile/load in Lua 5.1. Regression-first checks reproduced the notification-growth issue before the fixes. The initial managed-temp test harness path was changed to an explicitly writable scratch directory; no unresolved failure remains.
 
-## Icon assets
+Runtime ZIP: DropWatch-0.3.0.zip, exactly one DropWatch/ root and 22 files (manifest, Lua, two required textures). No tests/docs/caches/Git metadata/old releases. A future owner-approved LICENSE/NOTICE is included automatically after being added. Source timestamp variation yields identical ZIP bytes on the tested toolchain; archive contents/CRC and installed mocked boot are verified.
 
-Assets/DropWatch-Project.svg and 1024×1024 PNG provide detailed original project artwork: charcoal ground, teal radar circles/sweep, gold equipment shield and two detections. Assets/DropWatch-Mini.svg/PNG/TGA provide the simplified 64×64 variant with thick details and transparent circular corners. Main header and minimap load the new TGA through Interface/AddOns/DropWatch/Assets/DropWatch-Mini.tga. Settings.tga is unchanged. No arbitrary PNG/SVG game loading is assumed.
+SHA256: 7e0ae2ec7822025d77c5c24ea497420b83ca16c4cbf9f129ff1fbc3e587caa9d
 
-tools/build_icons.py generates both vector scenes and supersampled PNGs, then saves uncompressed 32-bit TGA through Pillow. All five generated files reproduce byte-for-byte with Pillow 12.3.0. The SVG sources are resolution-independent; the high-resolution export is suitable for future project listings. No artwork is uploaded. Local visual QA inspected 16/24/30/32px previews. WoW rendering remains untested for this rebrand.
+The ZIP, .sha256 and .manifest.json are adjacent in the candidate output directory. Previous release artifacts are preserved.
 
-## SavedVariables migration
+## Compatibility, security and limitations
 
-Legacy global names LootTrackerDB and LootTrackerSession intentionally remain declared. With WoW completely closed, copy the account SavedVariables/LootTracker.lua to DropWatch.lua unchanged, back up any existing new file, remove/move the old addon folder outside AddOns and install only DropWatch. Its loader preserves the same validated preference schema. No automatic access to the old filename, bridge addon or dual-active installation is claimed. Current-session history need not survive. See [the complete migration procedure](MIGRATION.md).
+[COMPATIBILITY_AUDIT.md](COMPATIBILITY_AUDIT.md) pins generated API/native chat sources to Retail 12.1.5 build 70529. All core and UI event names were located, and safe values/item links/SavedVariables/native input reviewed. Generated encounter recipient labels differ from observed working behavior; proven behavior is retained and raid validation remains explicit. No bypass of secret restrictions or guarantee of future client support is made.
 
-## Commands and namespace
+[SECURITY_PRIVACY_REVIEW.md](SECURITY_PRIVACY_REVIEW.md) found no external transmission, credentials, automatic chat/trade/gameplay, downloaded code, external process or addon messaging in runtime Lua. Debug information stays local unless the user deliberately shares it. WoW can persist bounded lightweight history for reload recovery; this is not secure erasure or permanent multi-session history.
 
-One DROPWATCH slash handler serves /dropwatch, /dw and legacy /loottracker, including settings/status/debug/diag/clear/demo/demo burst/demo off. The private namespace is still provided by addon varargs and now initializes for DropWatch. Native frames/Escape names use DropWatch consistently. No second event handler or parser was added. Interface 120105 is retained unchanged from the tested client.
+User-reported prior in-game successes: Mythic+ equipment/recipients/reconciliation, expiry, History, Warbound exclusion, main UI, minimap and branding. No actual client test/screenshot, exact-candidate combat/other-addon validation, raid test, moderation or post-publication installation was performed by the agent.
 
-## Automated results
+## License recommendation
 
-644 assertions pass in the complete suite: prior 579, new branding/migration/alias 25, and TOC/path/artwork 40. All 19 manifest Lua modules compile/load in fresh Lua 5.1 VMs. Existing tests still cover loot detection, reconciliation, expiration, History, empty whisper actions, Warbound/unknown behavior, demo isolation and minimap position/scale. Migration tests load an unmodified legacy preference assignment, then initialize the new addon and verify dimensions, positions, modes, opacity, lock, mount preference and minimap settings.
+No LICENSE is present or selected. Recommend **MIT for owner review** if permissive community reuse is desired; Apache-2.0 and restrictive source-visible alternatives are compared in [LICENSE_REVIEW.md](LICENSE_REVIEW.md), with primary terms and Blizzard policy references. Owner must approve holder/artwork terms, add the selected legal material, match the portal selection and rebuild before public release. No legal compatibility guarantee is claimed.
 
-Additional release checks verify a single DropWatch/ root and 22 runtime files, byte-matching the source; only manifest, Lua modules and the two required game textures are installed. Documentation, tests, SVG/PNG source art, generators, .git metadata and caches are excluded. Scope audit confirms all engine modules/Core/Safe.lua are byte-identical and minimap code changes only name/art strings.
+## Public materials and next actions
 
-## Package and in-game validation
+- [CurseForge description](CURSEFORGE_DESCRIPTION.md) and [concise release notes](CURSEFORGE_RELEASE_NOTES.md).
+- [Verified development changelog](../CHANGELOG.md): Git has initial 0.2.2 import and 0.3.0 rename, not invented older tags.
+- [Assets/screenshots inventory](RELEASE_ASSETS.md): original 1024px master, 400px portal PNG, game textures ready; real captures missing.
+- [20-case final client checklist](RELEASE_VALIDATION.md), with automation, user reports and untested cases separated.
+- [Officially sourced author portal procedure](CURSEFORGE_RELEASE_CHECKLIST.md); do not upload before owner approval.
+- [GitHub draft/setup actions](GITHUB_RELEASE.md) and [reproducible build instructions](BUILD_RELEASE.md).
 
-Install DropWatch-0.3.0.zip. Source artwork/docs/tools remain separately available in the source folder. Follow [TESTING.md](TESTING.md), especially the focused Task 02.3 steps: migration with one active addon, title/version/commands, small-size radar rendering at your UI scale, minimap drag/reload/visibility, existing UI controls, genuine loot/History/expiry/whisper and diagnostic filtering. Capture client build, scale and screenshots/errors. Native texture rendering, file writes and slash registration cannot be certified by frame mocks.
-
-## GitHub rename
-
-Current origin remains https://github.com/MathisVkg/loot-tracker.git. Nothing was renamed/pushed remotely. Recommended optional target: https://github.com/MathisVkg/dropwatch.git after an administrator renames the repository in GitHub Settings; then update origin and any repository links/badges/workflows/project sites. The local directory may retain its old name. See [officially sourced steps and affected URLs](REPOSITORY_RENAME.md). No GitHub release or CurseForge publication is performed.
-
-## Known limits
-
-Manual preference-file transfer is necessary unless the correct file already exists. Missing old files use defaults. Do not load both versions together. Current-login history recovery across the rename is not promised. Existing event restrictions, conservative unknown tradeability, bounded history, uncertain run associations and circular-only minimap geometry remain. No positive tradeability prediction, automated messaging/trading, external service or synchronization was added. Task 03 has not begun; wait for client feedback.
+Existing Git history and origin https://github.com/MathisVkg/loot-tracker.git remain unchanged. No license file, tag, commit, push, remote rename, account/project creation, upload or release was made. Wait for owner review/approval before releasing.

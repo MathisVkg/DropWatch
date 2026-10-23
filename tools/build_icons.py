@@ -51,4 +51,5 @@ def build(name,size,detailed):
 if __name__=="__main__":
     build("DropWatch-Project",1024,True)
     build("DropWatch-Mini",64,False)
-    print("Built 1024px project SVG/PNG and 64px minimap SVG/PNG/TGA")
+    Image.open(OUT/"DropWatch-Project.png").resize((400,400),Image.Resampling.LANCZOS).save(OUT/"DropWatch-CurseForge.png")
+    print("Built project/minimap assets plus a 400px portal PNG")

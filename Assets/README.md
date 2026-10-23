@@ -6,6 +6,7 @@ Original code-native geometric artwork, no external illustration or font.
 - DropWatch-Project.png: 1024×1024 high-resolution export for future GitHub/CurseForge use.
 - DropWatch-Mini.svg and DropWatch-Mini.png: simplified 64×64 radar/shield variant, intended for 24–32px minimap use and the existing 16px header.
 - DropWatch-Mini.tga: uncompressed 64×64 32-bit RGBA texture supported by the WoW client. Transparent corners preserve the existing circular presentation.
+- DropWatch-CurseForge.png: 400×400 portal export of the project master, excluded from runtime installation.
 - Settings.tga: unchanged original 32×32 settings gear.
 
 The palette is teal #58C4BD, gold #DDAA55 and charcoal #14191C, with flat muted sweep geometry. No text, heavy glow or gradients. The project variant adds radar rings and two detections; the minimap variant omits fine details.

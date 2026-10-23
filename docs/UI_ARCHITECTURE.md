@@ -72,3 +72,7 @@ Only active drag uses OnUpdate. Drag-stop, left mouse-up, global outside release
 The private namespace still comes from the addon's varargs, now loaded as DropWatch. Visible strings, native frame names, Escape registrations and texture paths use DropWatch consistently. The validated engine modules and minimap Position/Drag implementation are unchanged. Three native slash aliases share one DROPWATCH handler: /dropwatch, /dw and /loottracker. Settings continue using the documented legacy SavedVariables globals to support manual filename-copy migration without rewriting serialized data. There is one addon/event feed and no bridge loader.
 
 Main/minimap use Assets/DropWatch-Mini.tga; the settings gear remains Assets/Settings.tga. PNG/SVG source art is for development/project use, excluded from the runtime ZIP. See MIGRATION.md and Assets/README.md.
+
+## Release-candidate lifecycle hardening
+
+Session capacity eviction and actual record removal now retract outstanding notification identities/counts, bounding notification state during continuous awards and hiding removed provisional items. Native tooltip failures hide stale content. Matching, layout, expiry and minimap geometry are unchanged. See CODE_REVIEW.md and RELEASE_VALIDATION.md.
