@@ -1,0 +1,17 @@
+Loot Tracker 0.2.2 — Task 02.2 minimap positioning
+PASS: 62 baseline detection assertions
+PASS: 66 normalization/refinement assertions
+PASS: 68 interface/session assertions
+PASS: 59 UI polish/filter assertions
+PASS: 294 minimap geometry/drag assertions
+PASS: 30 fresh-VM login/reload restoration assertions
+TOTAL: 579 assertions
+PASS: 19 manifest Lua modules compile and load in fresh Lua 5.1 VMs
+Runtime: Python + lupa 2.8, mocked WoW/native frame APIs
+Minimap cases: sizes 120/150/240, effective scales 0.64/1/1.5,
+orbit and drag quadrants, button dimensions, resize/show/scale/display events,
+normalized/invalid/secret saved angles, outside release, hide/show interruption,
+ordinary clicks/tooltips and no idle polling.
+Existing custom TGA assets are unchanged.
+Real-client visual/mouse/security validation: pending; see TESTING.md.
+No unrelated features or Task 03 work.
