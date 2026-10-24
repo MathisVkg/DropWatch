@@ -1,4 +1,4 @@
-# DropWatch 0.3.0 manual validation
+# DropWatch 0.3.1 manual validation
 
 Existing Loot Tracker users: follow [MIGRATION.md](MIGRATION.md) with WoW closed before installation; a folder rename alone does not load the old preferences.
 
@@ -7,8 +7,8 @@ Automated mocks verify model calculations and callbacks, not WoW rendering, mous
 ## Install and prepare
 
 1. Exit WoW. Back up the existing DropWatch addon folder and SavedVariables if desired.
-2. Extract DropWatch-0.3.0.zip into _retail_/Interface/AddOns. Confirm DropWatch/DropWatch.toc is directly inside AddOns and both Assets TGA files exist.
-3. Enable the addon. Run /console scriptErrors 1, /reload, then /dropwatch status. Expect 0.3.0 and interface 120105; report the exact game build if different. Keep other addons unchanged first to catch integration problems.
+2. Extract DropWatch-0.3.1.zip into _retail_/Interface/AddOns. Confirm DropWatch/DropWatch.toc is directly inside AddOns and both Assets TGA files exist.
+3. Enable the addon. Run /console scriptErrors 1, /reload, then /dropwatch status. Expect 0.3.1 and interface 120105; report the exact game build if different. Keep other addons unchanged first to catch integration problems.
 4. Record any Lua error with its stack. Commands below collect no synthetic real loot and send no messages automatically.
 
 ## Layout, scrollbar and sizing
@@ -53,7 +53,7 @@ Development only: Python with lupa 2.8 (Lua 5.1 backend), then python tests/run.
 
 ## Task 02.2 focused minimap validation
 
-1. Install v0.3.0 and check /dropwatch status. Check the new radar icon; it should sit across the actual circular minimap rim, initially at the upper-right 45° when no angle was saved.
+1. Install v0.3.1 and check /dropwatch status. Check the new radar icon; it should sit across the actual circular minimap rim, initially at the upper-right 45° when no angle was saved.
 2. Left-drag slowly through the top, left, bottom and right sides and across the angle wrap at 0°/360°. The icon must stay on the rim, never cut across the map or float outward. Release outside the original button; it must stop following the cursor and must not toggle the panel.
 3. Make ordinary left/right clicks after releasing: panel toggle/settings still work. Hover shows controls including dragging; leaving or starting a drag hides the tooltip.
 4. Choose a distinctive angle such as lower-left. Run /reload, then log out/in. Both must restore the same angle. Moving/resizing the main window must not affect it.
@@ -66,7 +66,7 @@ Automated v0.2.2 coverage adds a minimap geometry/drag suite plus six fresh-VM l
 
 ## Task 02.3 focused rebranding checks
 
-1. Follow MIGRATION.md with WoW closed, then confirm only DropWatch is installed/enabled. Check the addon list Title/Notes and /dropwatch status for version 0.3.0/interface 120105.
+1. Follow MIGRATION.md with WoW closed, then confirm only DropWatch is installed/enabled. Check the addon list Title/Notes and /dropwatch status for version 0.3.1/interface 120105.
 2. Verify every migrated preference before changing it: main and settings positions, width/preferred maximum height, display mode, background opacity, lock, mount preference, minimap angle and visibility. Reload and log out/in; preferences should remain. Session history is allowed to start fresh.
 3. Test /dropwatch, /dw and /loottracker. Exercise status, debug, diag, clear, settings, demo, demo burst and demo off through the aliases. Each must invoke the same addon without duplicate detection or notifications.
 4. Inspect minimap at your usual UI scales: radar circle/sweep and gold shield, no missing green texture, rectangular halo or old cube. Header must show radar plus DropWatch, with the existing layout and button behavior. Settings, notifications, diagnostics and command feedback must use DropWatch.
@@ -78,4 +78,4 @@ The install ZIP intentionally omits this documentation and development sources. 
 
 ## Release-candidate sign-off
 
-Use [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md) as the final 20-case sign-off matrix. Prior user-reported successes are distinguished from tests not yet performed on this exact hardened 0.3.0 ZIP; raid coverage remains incomplete. No publication is performed by the build/test scripts.
+Use [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md) as the final 20-case sign-off matrix. Prior user-reported successes are distinguished from tests not yet performed on this exact hardened 0.3.1 ZIP; raid coverage remains incomplete. No publication is performed by the build/test scripts.

@@ -2,7 +2,9 @@ local _, ns = ...
 local S = ns.Safe
 ns.events = { "CHAT_MSG_LOOT", "ENCOUNTER_LOOT_RECEIVED", "ENCOUNTER_START", "ENCOUNTER_END",
     "CHALLENGE_MODE_START", "CHALLENGE_MODE_COMPLETED", "CHALLENGE_MODE_COMPLETED_REWARDS",
-    "CHALLENGE_MODE_RESET", "PLAYER_ENTERING_WORLD", "ITEM_DATA_LOAD_RESULT", "GROUP_ROSTER_UPDATE", "PLAYER_LOGOUT" }
+    "CHALLENGE_MODE_RESET", "PLAYER_ENTERING_WORLD", "ITEM_DATA_LOAD_RESULT", "GROUP_ROSTER_UPDATE", "PLAYER_LOGOUT",
+    "ITEM_UPGRADE_MASTER_OPENED", "ITEM_UPGRADE_MASTER_CLOSED",
+    "ITEM_UPGRADE_MASTER_SET_ITEM", "ITEM_UPGRADE_MASTER_UPDATE" }
 ns.registered = {}
 local frame = CreateFrame("Frame")
 ns.eventFrame = frame
@@ -56,6 +58,13 @@ function ns:OnEvent(event, ...)
         if not self.guardWarning then self:Print("Secret-value guard unavailable; capture disabled."); self.guardWarning = true end
         return
     end
+    local upgradeEvent = event == "ITEM_UPGRADE_MASTER_OPENED" or event == "ITEM_UPGRADE_MASTER_CLOSED"
+        or event == "ITEM_UPGRADE_MASTER_SET_ITEM" or event == "ITEM_UPGRADE_MASTER_UPDATE"
+    if event == "ITEM_UPGRADE_MASTER_OPENED" then self.upgradeOpen = true
+    elseif event == "ITEM_UPGRADE_MASTER_CLOSED" then self.upgradeOpen = false
+    elseif event == "PLAYER_ENTERING_WORLD" then self.upgradeOpen = nil end
+    -- Upgrade markers are diagnostics only. Never infer an award or suppress loot from NPC proximity.
+    if upgradeEvent and not self.db.debug then return end
     local args = S.Pack(...)
     if event=="PLAYER_ENTERING_WORLD" then self.Session:OnWorld(args[1],args[2]) end
     if event == "GROUP_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD" then self.Recipients:Refresh() end
@@ -64,6 +73,17 @@ function ns:OnEvent(event, ...)
     self.sequence = self.sequence+1
     local raw = { id=self.sequence, event=event, timestamp=time(), clock=GetTime(), context=self.Context:Snapshot(),
         args=S.Args(...), status="context event (no loot assumed)" }
+    if upgradeEvent then
+        local selected = S.Call(C_ItemUpgrade and C_ItemUpgrade.GetItemHyperlink)
+        local links = self.Parser.Links(selected[1])
+        local level = S.Call(C_ItemUpgrade and C_ItemUpgrade.GetItemUpgradeCurrentLevel)
+        raw.args = { itemID=links[1] and tonumber(links[1]:match("|Hitem:(%d+)")),
+            itemLevel=S.Value(level[1], "number"), open=self.upgradeOpen }
+        raw.status = "upgrade diagnostic only (no acquisition)"
+    elseif self.db.debug and (event == "CHAT_MSG_LOOT" or event == "ENCOUNTER_LOOT_RECEIVED"
+        or event == "ITEM_DATA_LOAD_RESULT") then
+        raw.upgradeOpen = self.upgradeOpen
+    end
     self:Push(self.raw, raw)
     if event == "ITEM_DATA_LOAD_RESULT" then self.Loot:Loaded(args[1], args[2]); raw.status="item data result"
     else self.Loot:Observe(raw, args) end

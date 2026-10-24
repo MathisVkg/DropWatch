@@ -1,8 +1,8 @@
-# Midnight compatibility audit — 0.3.0 candidate
+# Midnight compatibility audit — 0.3.1 candidate
 
 Audit date: 2026-10-23. API snapshot: [Gethe client-source mirror commit e7aa82019dc298e0351c7159d60c2a9b916b9b67](https://github.com/Gethe/wow-ui-source/commit/e7aa82019dc298e0351c7159d60c2a9b916b9b67), identified as Retail 12.1.5 build 70529. This is a community mirror of primary client code, not a Blizzard endorsement or in-game test.
 
-TOC interface **120105** and addon version **0.3.0** remain unchanged. Final validation records /dump GetBuildInfo() on the actual client before upload; no future patch compatibility or extra game flavors are claimed.
+TOC interface **120105** remains unchanged; addon version is now **0.3.1**. Final validation records /dump GetBuildInfo() on the actual client before upload; no future patch compatibility or extra game flavors are claimed.
 
 ## Registered events verified in source
 
@@ -25,7 +25,7 @@ TOC interface **120105** and addon version **0.3.0** remain unchanged. Final val
 | UI_SCALE_CHANGED | [UIManagerDocumentation.lua](https://github.com/Gethe/wow-ui-source/blob/e7aa82019dc298e0351c7159d60c2a9b916b9b67/Interface/AddOns/Blizzard_APIDocumentationGenerated/UIManagerDocumentation.lua) |
 | DISPLAY_SIZE_CHANGED | [VideoDocumentation.lua](https://github.com/Gethe/wow-ui-source/blob/e7aa82019dc298e0351c7159d60c2a9b916b9b67/Interface/AddOns/Blizzard_APIDocumentationGenerated/VideoDocumentation.lua) |
 
-The twelve core post-initialization events register through pcall, exposing unavailable registration in /dropwatch status. ADDON_LOADED checks the runtime addon name once; main/minimap UI use their own release/scale events without adding a second loot feed.
+The core post-initialization events register through pcall, exposing unavailable registration in /dropwatch status. ADDON_LOADED checks the runtime addon name once; main/minimap UI use their own release/scale events without adding a second loot feed.
 
 Payload review: chat text/recipient and line-ID positions are preserved; item loading uses itemID/success; encounter start/end use ID/name/difficulty/group size/success; challenge rewards are context only, never fabricated item awards. World-entry's initial-login/reloading-UI booleans govern bounded cache recovery; logout writes through WoW's SavedVariables lifecycle.
 
@@ -48,3 +48,7 @@ Only LootTrackerDB and LootTrackerSession are declared, intentionally retaining 
 Raw/observed/canonical stores: 200 each; canonical contributors: at most two; candidate IDs: eight; session snapshots: 1,000; demo: 60; notification identities: retained session capacity after this fix. UI pools recycle visible frames. Matching/pending scans remain bounded, and only active minimap drag has its own update callback. Core refresh cadence remains 0.5 seconds; no per-item countdown or perpetual metadata polling is added.
 
 Source review and mocks support these conclusions; current-client registration, actual event semantics in raids, native input behavior and final disk migration still need RELEASE_VALIDATION.md.
+
+## 0.3.1 upgrade diagnostic additions
+
+ITEM_UPGRADE_MASTER_SET_ITEM/UPDATE and C_ItemUpgrade.GetItemHyperlink/GetItemUpgradeCurrentLevel were checked against the current primary client API mirror, not the older pinned snapshot. Optional legacy OPENED/CLOSED registration uses pcall and may be unavailable. Open state stays unknown until observed; missing/restricted APIs do not stop normal loot capture. These events are debug context only, never acquisition evidence. See [the investigation](LOOT_ACQUISITION_REVIEW.md) for the source link and limitations. No interface bump or new flavor support is claimed.

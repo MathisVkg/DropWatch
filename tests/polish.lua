@@ -7,7 +7,7 @@ function run_polish(ns)
     ns.db.displayMode="manual"
     local link="|cffa335ee|Hitem:123:0:0:0:0:0:0:0:80:0:0:2:1:2|h[Test Helm]|h|r"
     local function award(id,age)
-        return {id=id,timestamp=time()-(age or 0),equipment=true,loaded=true,itemID=123,link=link,
+        return {id=id,timestamp=time()-(age or 0),equipment=true,loaded=true,rarity=4,itemID=123,link=link,
             itemName="Helm",category="armor",player="Other",realm="Realm",quantity=1,
             context={instance="Test",instanceID=123,difficulty=8,run=1}}
     end

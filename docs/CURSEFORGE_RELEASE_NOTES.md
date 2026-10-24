@@ -1,15 +1,9 @@
-# DropWatch 0.3.0 — draft first-public-version notes
+# DropWatch 0.3.1 — draft release notes
 
-First public-version candidate for DropWatch, a standalone group equipment tracker for WoW Retail Midnight.
+- Exclude confirmed grey (Poor-quality) equipment from canonical awards, Loot, History and notifications. Defer unknown quality safely; retain other equipment qualities and optional mounts.
+- Require recognized, non-conflicting loot acquisition evidence. Cache callbacks, upgrade markers and metadata refreshes do not independently create acquisition candidates.
+- Preserve original item hyperlinks and the first captured effective level. Repeated observation ingestion and stable chat-line replays cannot mint duplicate awards while their diagnostic records are retained.
+- Add debug-only upgrade NPC markers and focused regression fixtures. The exact live Steelbark Cloak event sequence remains unconfirmed; recognized acquisition-style notifications are preserved until evidence supports a narrower correction.
+- UI design, Warbound exclusions, recipient-specific loot, M+ reconciliation, Quick Whisper, History, 15-minute Recent expiry and display modes are retained.
 
-- Recent Loot, grouped session History, native item links and empty quick-whisper shortcuts.
-- Automatic panel, compact notification and manual display modes.
-- Conservative Warbound filtering with unknown/Soulbound group equipment retained.
-- Adaptive panel height, persistent settings and a draggable radar minimap icon.
-- /dropwatch and /dw commands; /loottracker remains compatible.
-- Release hardening fixes notification tracking and delayed-removal counts.
-- MIT license included, covering original DropWatch artwork; third-party game resources remain their owners’ property.
-
-Mythic+ behavior has been reported working in game; raid-specific validation remains incomplete. No automatic messaging/trading or tradeability guarantee. Upgrading from Loot Tracker requires the documented settings-file copy with WoW closed.
-
-Draft only: no public release has occurred. Owner decides final release type and version after validation.
+Retail interface 120105 is unchanged. MIT LICENSE included. Final exact-client/NPC/raid validation remains required; see IN_GAME_031_CHECKLIST.md and LOOT_ACQUISITION_REVIEW.md. No public release, tag or CurseForge publication has occurred.

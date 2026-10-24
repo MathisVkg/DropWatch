@@ -1,6 +1,14 @@
 # Changelog
 
-Version 0.3.0 remains a local release candidate; no public release/tag is created here.
+Version 0.3.1 remains a local release candidate; no public release/tag is created here.
+
+## 0.3.1
+
+- Exclude confirmed Poor-quality equipment from canonical awards and all player views; defer equipment with unavailable quality.
+- Require recognized, non-conflicting acquisition evidence before normalization; metadata callbacks only enrich captured candidates.
+- Make observation ingestion idempotent, retain stable chat-line duplicate protection across the bounded observation store and freeze captured item levels.
+- Add debug-only upgrade NPC markers and regression fixtures. The exact Steelbark Cloak event sequence still needs an in-game capture; no speculative item-ID or NPC-wide suppression is used.
+- Retain interface 120105, original UI/artwork and MIT license.
 
 ## 0.3.0
 

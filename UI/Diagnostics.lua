@@ -25,6 +25,9 @@ function U:Render()
         local r = list[i]
         if (self.mode ~= 4 or r.ambiguous) and (self.mode ~= 5 or r.selected) then
             lines[#lines+1] = "#" .. r.id .. " " .. date("%H:%M:%S", r.timestamp) .. " " .. (r.event or r.source or "canonical") .. " | " .. S.Text(r.status)
+            if ns.db.debug and r.upgradeOpen ~= nil then
+                lines[#lines+1] = "  upgrade NPC open=" .. tostring(r.upgradeOpen) .. " (context only)"
+            end
             if r.source or r.sourceEvents then
                 lines[#lines+1] = "  " .. S.Text(r.player) .. (r.realm and "-" .. r.realm or "") ..
                     " | item=" .. S.Text(r.itemID) .. " ilvl=" .. S.Text(r.itemLevel) .. " qty=" .. S.Text(r.quantity)

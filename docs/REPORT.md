@@ -1,27 +1,63 @@
-# DropWatch 0.3.0 — MIT and final archive
+# DropWatch 0.3.1 — loot filtering and upgrade detection
 
-The owner selected MIT. The complete standard license is in root LICENSE with Copyright (c) 2026 Mathis Vankoekelberg. Original DropWatch radar/master/minimap/portal artwork and the settings gear are covered; native Blizzard resources and third-party intellectual property are excluded. See [license and provenance review](LICENSE_REVIEW.md).
+## Outcome and cause analysis
 
-## Changes
+Confirmed Poor-quality equipment is excluded before canonical creation or removed after delayed classification. Unknown/secret quality is deferred safely and cannot open Loot, enter History or notify. Other non-Poor equipment and optional mounts remain supported.
 
-Added LICENSE; updated README, CHANGELOG, Assets/README and release/license/validation documentation. Canonical GitHub links now use https://github.com/MathisVkg/DropWatch. Added explicit packaging regressions for license bytes, copyright, completeness and the 23-file allowlist. Existing optional-notice coverage remains.
+Only recognized, non-conflicting CHAT_MSG_LOOT / ENCOUNTER_LOOT_RECEIVED evidence can create acquisition candidates. Unknown linked messages, created items and conflicting payloads stay diagnostic-only. Cache callbacks can only enrich captured candidates, observation replay is idempotent and stable chat line replay remains bounded by the existing observation store. Captured original hyperlinks and the first readable effective levels are retained; later metadata refreshes do not rewrite old awards.
 
-No addon functionality, runtime Lua, manifest, texture or icon bytes changed. Version 0.3.0 and interface 120105 are retained. Existing Git history is preserved; this task commits the changes locally and aligns origin with the supplied URL.
+The unchanged 0.3.0 source reproduced the grey bug, the unknown-format normalization gap and refresh overwriting a captured level. It also confirmed callbacks alone do not create awards. These are confirmed source/mock findings, not proof of the exact live Steelbark Cloak sequence.
 
-## Validation
+**Remaining uncertainty:** no original NPC event trace was supplied. If the client emits a recognized acquisition-style message for an upgrade, this candidate may still accept it. No NPC-wide, self-loot, pushed-loot or global item-ID/name suppression was added. Use [the focused in-game checklist](IN_GAME_031_CHECKLIST.md) to capture the sequence. See [full investigation](LOOT_ACQUISITION_REVIEW.md) for evidence and hypotheses.
 
-All 836 automated assertions pass: 62 baseline, 66 refinement, 68 interface/session, 59 UI polish/filter, 294 minimap geometry/scale/drag, 30 fresh login/reload, 25 rebrand/migration/slash, 40 manifest/path/artwork, 13 release stability and 179 release/security checks. All 19 modules compile/load using lupa 2.8 with Lua 5.1. The packaged modules boot in a fresh mocked client.
+## Tests and archive
 
-The existing tools/package.py produced DropWatch-0.3.0.zip with one DropWatch/ root and exactly 23 files: TOC, 19 Lua modules, two required TGA textures and LICENSE. No development files or unnecessary artwork exports are installed. Payload/source equality, CRC integrity, fixed metadata, sidecar manifest/checksum and byte-identical builds despite changed source mtimes pass.
+All 921 assertions pass, including 81 new acquisition/quality/upgrade checks and all existing suites. All 19 modules compile/load with Lua 5.1 (lupa 2.8); the exact ZIP boots with mocked native APIs. Normal/raid boss awards, M+ multi-recipient/multi-source rewards, separate repeated acquisitions, Warbound, mounts, whisper, History, expiry, display modes and secret/missing data regressions pass. Four additional baseline assertions cover optional event registration.
 
-Toolchain: Python 3.12.14, zlib 1.3.2, lupa 2.8. No runtime dependency added.
+Existing tools/package.py builds DropWatch-0.3.1.zip deterministically: one DropWatch/ root and 23 files (TOC, 19 Lua modules, two required TGA textures and MIT LICENSE). Source/payload bytes, CRC, fixed ZIP metadata, sidecar hashes/manifest, exclusions and changed-mtime reproducibility pass. LICENSE is unchanged and packaged exactly. Original artwork and all UI design files are unchanged; only diagnostic text was added to the existing diagnostic view.
 
-SHA256: dd054c32e29da74bb01a1e1f05ee4c84be737ee259ff3fc6d0bc401a8e4f1523
+SHA256: a9c38834c22a4fd36a6b652ef808f0d5faba71ea439645045a443a445c35f05e
 
-The checksum and manifest are adjacent to the ZIP. LICENSE inside the archive exactly matches the repository file.
+Toolchain: Python 3.12.14, zlib 1.3.2, lupa 2.8 / Lua 5.1. Version 0.3.1 is consistent in manifest, namespace, packager and current release docs/tests; historical version references are retained. Interface 120105 is unchanged.
 
-## Remaining publication blockers
+## Files modified
 
-Final exact-candidate WoW smoke/upgrade and gameplay checks, raid validation or explicit acceptance/disclosure, real gameplay screenshots, public source/Issues accessibility, final author publication approval and CurseForge account/project setup remain pending. Mock tests do not establish live-client rendering or combat behavior.
+- CHANGELOG.md
+- Core/Events.lua
+- Core/Namespace.lua
+- docs/BUILD_RELEASE.md
+- docs/CODE_REVIEW.md
+- docs/COMPATIBILITY_AUDIT.md
+- docs/CURSEFORGE_DESCRIPTION.md
+- docs/CURSEFORGE_RELEASE_CHECKLIST.md
+- docs/CURSEFORGE_RELEASE_NOTES.md
+- docs/GITHUB_RELEASE.md
+- docs/IN_GAME_031_CHECKLIST.md
+- docs/LOOT_ACQUISITION_REVIEW.md
+- docs/MIGRATION.md
+- docs/RELEASE_VALIDATION.md
+- docs/REPORT.md
+- docs/SECURITY_PRIVACY_REVIEW.md
+- docs/TESTING.md
+- docs/VALIDATION.txt
+- DropWatch.toc
+- Modules/Loot.lua
+- Modules/Normalize.lua
+- Modules/Presentation.lua
+- README.md
+- tests/acquisition.lua
+- tests/branding.lua
+- tests/packaging.py
+- tests/polish.lua
+- tests/refinement.lua
+- tests/release.lua
+- tests/release_packaging.py
+- tests/run.py
+- tools/package.py
+- UI/Diagnostics.lua
 
-No GitHub release, push, tag or CurseForge publication is performed. License selection is complete; publication is a separate owner decision.
+## Remaining validation and publication
+
+No new live-client test is claimed. NPC acquisition-style message reproduction, grey-drop and real dungeon/raid checks, final smoke/upgrade validation, screenshots, public source/Issues verification and author publication approval remain pending.
+
+The initial Git worktree was clean at 85da5e1. Changes remain in the working tree for review; no history rewrite, commit, tag, push, GitHub release or CurseForge publication is performed.

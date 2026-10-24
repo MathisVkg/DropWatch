@@ -99,7 +99,7 @@ function run_refinement(ns)
     check(ns.records[3].player=="Игрок" and ns.records[3].realm=="Мир" and ns.records[3].quantity==1,"D: positional non-Latin")
     LOOT_ITEM_PUSHED=previous
     event("CHAT_MSG_LOOT","Unknown format "..helm,"Delta-RealmFour")
-    check(ns.records[4].quantity==nil and ns.normalized[#ns.normalized].confidence.quantity=="unavailable","D: unknown quantity is not fabricated")
+    check(ns.records[4].quantity==nil and #ns.normalized==3 and not ns.records[4].canonicalID,"D: unknown format stays diagnostic-only")
     event("CHAT_MSG_LOOT","You receive item: "..helm.."x? .","Self-Realm")
     check(ns.records[#ns.records].quantity==nil,"D: malformed suffix cannot be parsed as single")
     local before=#ns.normalized
@@ -178,7 +178,7 @@ function run_refinement(ns)
     check(ns.normalized[#ns.normalized].itemLevel==nil,"J: secret API result scrubbed")
     C_Item.GetDetailedItemLevelInfo=getLevel
     reset(); event("ENCOUNTER_LOOT_RECEIVED",900,193755,helm,1,"Alpha-RealmOne")
-    check(ns.normalized[1].ambiguous and not ns.normalized[1].itemID and ns.counters.failures==1,"J: conflicting event/link IDs are not presented as confirmed")
+    check(not ns.normalized[1] and ns.records[1].itemIdentityConflict and ns.counters.failures==1,"J: conflicting event/link IDs remain diagnostic-only")
     reset()
     roster.party1={"Private","RealmOne","Player-private"}
     local getGUID=UnitGUID

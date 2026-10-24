@@ -4,8 +4,9 @@ Prepared on 2026-10-23 from [Creating and Submitting a Project](https://support.
 
 ## Before opening the portal
 
-- [ ] Owner authorizes publication and selects the final version/type; this candidate remains 0.3.0.
+- [ ] Owner authorizes publication and selects the final version/type; this candidate remains 0.3.1.
 - [x] MIT selected by the owner, LICENSE/artwork terms documented and matching archive rebuilt.
+- [ ] NPC upgrade/grey-drop reproduction in IN_GAME_031_CHECKLIST.md completed; acquisition-style upgrade messages captured if present.
 - [ ] Final manual validation completed; raid gap either tested or explicitly accepted/disclosed.
 - [ ] Real main/History/settings screenshots supplied; optional notification capture.
 - [ ] Source/support links accessible to users; issue reporting enabled.
@@ -19,7 +20,7 @@ Prepared on 2026-10-23 from [Creating and Submitting a Project](https://support.
 2. Enter DropWatch, the prepared summary/English description and project PNG. Choose class Addons; Bags & Inventory is the suggested main category. Use only relevant additional categories actually offered.
 3. Select MIT, matching the packaged LICENSE; review the displayed terms. Add verified source and issue links. Save the project details.
 4. Add real gallery screenshots through Images. Review the public-page draft.
-5. In Files, choose the verified DropWatch-0.3.0.zip, add release notes and select the exact tested Retail game version/flavor (current audit: 12.1.5/interface 120105). Do not tag Classic or other flavors.
+5. In Files, choose the verified DropWatch-0.3.1.zip, add release notes and select the exact tested Retail game version/flavor (current audit: 12.1.5/interface 120105). Do not tag Classic or other flavors.
 6. Choose Beta only for an intentional pre-release; choose Release only after final owner approval. Confirm release timing/visibility controls before uploading. No dependencies are required.
 7. Upload once, inspect moderation status and address any requested changes. Approval timing is external.
 8. After authorized publication, install the approved file through CurseForge into a clean Retail addon directory; repeat the smoke plan and compare version/files/checksum.

@@ -15,6 +15,7 @@ DropWatch displays equipment received by party and raid members, helping you see
 - Quick Whisper opens an empty native whisper input for the selected player. Nothing is sent automatically.
 - Choose an automatic panel, a compact notification or manual display.
 - Move/resize the panel; adaptive height fits the content up to your preferred maximum.
+- Confirmed Poor-quality equipment is excluded; equipment with unavailable quality waits for readable data. Other equipment qualities remain supported.
 - Confirmed Warbound/account-bound equipment is filtered from player views. Unknown and ordinary Soulbound equipment remain visible.
 - Optional mount tracking, independent settings, background opacity and a draggable radar minimap button.
 

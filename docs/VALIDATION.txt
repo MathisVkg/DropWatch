@@ -1,5 +1,5 @@
-DropWatch 0.3.0 — Task 03.1 MIT and final archive
-PASS: 62 baseline detection assertions
+DropWatch 0.3.1 — acquisition, quality and upgrade safeguards
+PASS: 66 baseline detection/registration assertions
 PASS: 66 normalization/refinement assertions
 PASS: 68 interface/session assertions
 PASS: 59 UI polish/filter assertions
@@ -8,16 +8,18 @@ PASS: 30 fresh-VM login/reload assertions
 PASS: 25 rebranding/migration/slash assertions
 PASS: 40 manifest/path/artwork assertions
 PASS: 13 release stability assertions
+PASS: 81 acquisition/quality/upgrade assertions
 PASS: 179 deterministic-release/security assertions
-TOTAL: 836 assertions, no unresolved test failures
+TOTAL: 921 assertions, no unresolved test failures
 PASS: all 19 runtime modules compile/load in Lua 5.1 through lupa 2.8
-PASS: clean installed ZIP boot with mock native APIs; exact payload/CRC/root checks
-PASS: deterministic archive despite changed source mtimes; fixed ZIP metadata
-PASS: 23 installed files including MIT LICENSE; checksums and manifest outside archive
-Candidate version 0.3.0/interface 120105 unchanged.
-Pinned source audit: Gethe e7aa82019dc298e0351c7159d60c2a9b916b9b67, 12.1.5 (70529).
-User-reported gameplay successes are recorded separately in RELEASE_VALIDATION.md.
-Exact candidate smoke/raid checks, real screenshots, public support access remain pending.
-MIT selected by the owner; original artwork coverage and third-party exclusions documented.
-License/docs/tests committed locally; no tag, push, project submission or publication.
-SHA256: dd054c32e29da74bb01a1e1f05ee4c84be737ee259ff3fc6d0bc401a8e4f1523
+PASS: exact installed ZIP boot with mock native APIs
+PASS: canonical grey rejection and delayed-quality silence in all modes
+PASS: repeated callbacks/NPC-only events create no acquisitions; captured levels stay frozen
+PASS: distinct recipients and repeated real acquisitions retained; chat/encounter pairs reconcile
+PASS: missing/secret quality/upgrade API data handled safely
+PASS: source/payload equality, CRC integrity, single DropWatch root and deterministic builds
+PASS: 23 installed files including unchanged MIT LICENSE; no development artifacts
+Version bumped to 0.3.1; interface 120105 retained.
+Exact live Steelbark Cloak event sequence remains unknown. Acquisition-style NPC messages need a debug trace.
+No new in-game client/raid test, GitHub release, tag, push or CurseForge publication.
+SHA256: a9c38834c22a4fd36a6b652ef808f0d5faba71ea439645045a443a445c35f05e

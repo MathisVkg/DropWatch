@@ -1,4 +1,4 @@
-# Security and privacy review — 0.3.0 candidate
+# Security and privacy review — 0.3.1 candidate
 
 Reviewed every runtime module in DropWatch.toc, the two texture dependencies and the whitelist packager.
 
@@ -20,3 +20,7 @@ Recent expiry does not delete session History. PLAYER_LOGOUT can write lightweig
 User-triggered native modified item clicks and opening a whisper can expose an item/recipient in the user's own game UI; actual chat sending remains the user's action. If the user manually copies diagnostics or screenshots to an issue, review/redact identifiers first.
 
 Development Python tools use local files, temporary folders, Pillow/lupa and ZIP operations. They are excluded from installation and never executed by the addon. Test safety scans are supporting evidence, not a formal exploit proof. No runtime exception requiring external transmission or credentials was found. Native taint/combat behavior still requires final client validation.
+
+## 0.3.1 upgrade diagnostics
+
+Debug-only upgrade markers add selected item ID/current upgrade level and optional open state, with event/time, to the bounded in-memory raw view. No inventory scan, player identity, full selected-item link, NPC identity or currency details are added by the markers. Debug off makes no upgrade selected-item API queries. Existing raw acquisition chat still contains identifiers and requires review/redaction before manual sharing. Markers do not create awards, persist or transmit data. API failures/secret primitives are omitted safely.

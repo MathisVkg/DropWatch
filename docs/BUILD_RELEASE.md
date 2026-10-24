@@ -1,4 +1,4 @@
-# Build and verify DropWatch 0.3.0
+# Build and verify DropWatch 0.3.1
 
 ## Development tools
 
@@ -19,9 +19,9 @@ Reviewed toolchain: Python 3.12.14, zlib 1.3.2, lupa 2.8 (Lua 5.1), Pillow 12.3.
 python tools/package.py <output-directory>
 
 Outputs:
-- DropWatch-0.3.0.zip
-- DropWatch-0.3.0.sha256
-- DropWatch-0.3.0.manifest.json
+- DropWatch-0.3.1.zip
+- DropWatch-0.3.1.sha256
+- DropWatch-0.3.1.manifest.json
 
 The packager validates title/version/interface, internal version, unique manifest files, original-source texture paths and safe file resolution. It installs only the TOC, 19 Lua files, two TGA textures and the approved MIT LICENSE (23 files). An optional NOTICE is also included if present. Exactly one DropWatch/ root is created.
 
@@ -33,4 +33,6 @@ The suite additionally builds from a temporary clone with changed mtimes, compar
 
 ## Approval boundary
 
-Keep 0.3.0 as the candidate. MIT has been selected by the owner and LICENSE is packaged. Do not push, tag or upload from this script. After source changes, rerun tests and build from the validated commit. Review the archive manifest and manual checklist before author approval.
+Keep 0.3.1 as the candidate. MIT has been selected by the owner and LICENSE is packaged. Do not push, tag or upload from this script. After source changes, rerun tests and build from the validated commit. Review the archive manifest and manual checklist before author approval.
+
+0.3.1 adds acquisition/quality/upgrade fixtures in tests/acquisition.lua. All existing suites remain in tests/run.py. Capture the exact NPC event sequence using IN_GAME_031_CHECKLIST.md before claiming the live false-positive sequence is fully resolved.

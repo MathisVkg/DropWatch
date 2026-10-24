@@ -1,6 +1,6 @@
 local name, ns = ...
 ns.name = name
-ns.version = "0.3.0"
+ns.version = "0.3.1"
 ns.raw, ns.records, ns.normalized = {}, {}, {}
 ns.sequence = 0
 ns.recordSequence, ns.observationSequence = 0, 0

@@ -39,6 +39,12 @@ function F:Classify(record)
     -- Neither Soulbound nor a bonus-roll source proves absence of group trading.
 end
 function F:Visible(record)
+    -- Canonical selection gate shared by Recent, History, restore and notifications.
+    -- Unknown/secret quality is deferred; do not infer it from hyperlink color.
+    if record.equipment then
+        local quality = S.Value(record.rarity, "number")
+        if quality == nil or quality == 0 or quality < 0 or quality % 1 ~= 0 then return false end
+    end
     return not (record.tradeability=="confirmed-ineligible"
         and record.classificationConfidence=="confirmed" and record.exclusionReason~=nil)
 end

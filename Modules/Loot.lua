@@ -9,32 +9,41 @@ function L:Resolve(record)
     record.equipLoc, record.icon, record.classID, record.subclassID = instant[4] or record.equipLoc,
         instant[5] or record.icon, instant[6] or record.classID, instant[7] or record.subclassID
     local info, infoError = S.Call(C_Item and C_Item.GetItemInfo, query)
-    record.itemName, record.rarity = info[1] or record.itemName, info[3] or record.rarity
+    record.itemName = S.Value(info[1], "string") or record.itemName
+    local quality = S.Value(info[3], "number")
+    if quality and quality >= 0 and quality % 1 == 0 then record.rarity = quality end
     record.equipLoc, record.icon, record.classID, record.subclassID = info[9] or record.equipLoc,
         info[10] or record.icon, info[12] or record.classID, info[13] or record.subclassID
     record.bindType = info[14] or record.bindType
     local levels, levelError = {}, nil
-    if record.link then levels, levelError = S.Call(C_Item and C_Item.GetDetailedItemLevelInfo, record.link) end
-    record.itemLevel = levels[1] or record.itemLevel -- Never substitute a base level for a missing variant level.
+    if record.link and record.itemLevel == nil then levels, levelError = S.Call(C_Item and C_Item.GetDetailedItemLevelInfo, record.link) end
+    -- Freeze the first readable level for this captured hyperlink; refreshes are not upgrades to an award.
+    record.itemLevel = record.itemLevel or S.Value(levels[1], "number")
     local mount, mountError = {}, nil
     if record.itemID then mount, mountError = S.Call(C_MountJournal and C_MountJournal.GetMountFromItem, record.itemID) end
     record.mountID = mount[1] or record.mountID
     record.category, record.equipment = P.Category(record.equipLoc, record.classID, record.mountID)
     ns.Presentation:Classify(record)
     record.apiError = instantError or infoError or levelError or mountError
-    record.selected = record.equipment or (ns.db.trackMounts and record.category == "mount")
+    record.qualityPending = record.equipment and record.rarity == nil
+    record.selected = (record.equipment and not record.qualityPending and record.rarity ~= 0)
+        or (ns.db.trackMounts and record.category == "mount")
     record.loaded = record.itemName ~= nil and record.equipLoc ~= nil
-    if not record.loaded then record.status = "pending item data"
+    if record.equipment and record.rarity == 0 then record.status = "filtered: Poor-quality equipment"
+    elseif not record.loaded then record.status = "pending item data"
+    elseif record.qualityPending then record.status = "pending item quality"
     elseif record.duplicateOf then record.status = "duplicate notification #" .. record.duplicateOf
     elseif record.equipment then record.status = "equipment: " .. record.category
     elseif record.category == "mount" then record.status = ns.db.trackMounts and "mount selected" or "mount (tracking off)"
     else record.status = "filtered: irrelevant" end
     if record.loaded and record.itemLevel == nil then record.status = record.status .. "; level unavailable" end
+    if not ns.Normalize:HasAcquisition(record) then
+        record.status = "unprocessed: acquisition evidence unavailable or conflicting"
+    end
 end
 function L:Duplicate(record)
     for i = #ns.records, 1, -1 do
         local previous = ns.records[i]
-        if record.clock-previous.clock > 5 then break end
         if record.lineID and record.lineID > 0 and previous.source == record.source
             and previous.lineID == record.lineID and previous.link == record.link then
             record.duplicateOf = previous.duplicateOf or previous.id
@@ -82,7 +91,7 @@ function L:Observe(raw, args)
         ns:Push(ns.records, record)
         self:Resolve(record)
         if not record.loaded and not record.itemID then record.status = "unprocessed: no readable item ID" end
-        if (not record.loaded or record.bindingPending or (record.equipment and not record.itemLevel)) and record.itemID then
+        if (not record.loaded or record.qualityPending or record.bindingPending or (record.equipment and not record.itemLevel)) and record.itemID then
             record.deadline = GetTime()+15
             local _, err = S.Call(C_Item and C_Item.RequestLoadItemDataByID, record.itemID)
             if err then record.status = "unprocessed: " .. err; record.deadline = nil end
@@ -111,7 +120,7 @@ function L:Loaded(itemID, success)
             if success == false then record.status = "unprocessed: item load failed"; record.deadline = nil
             elseif success then
                 self:Resolve(record)
-                if record.loaded and not record.bindingPending and (not record.equipment or record.itemLevel) then record.deadline = nil end
+                if record.loaded and not record.qualityPending and not record.bindingPending and (not record.equipment or record.itemLevel) then record.deadline = nil end
             end
             ns.Normalize:Update(record)
         end

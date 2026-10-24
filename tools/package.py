@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib, json, re, sys, zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-VERSION="0.3.0"
+VERSION="0.3.1"
 INTERFACE="120105"
 TEXTURES=("Assets/DropWatch-Mini.tga","Assets/Settings.tga")
 def require(value,message):
@@ -23,7 +23,7 @@ def release_members(root=ROOT):
     modules=[line.strip() for line in text.splitlines() if line.strip() and not line.startswith("#")]
     require(len(modules)==19 and len(set(modules))==19,"Invalid or duplicate module list")
     members=["DropWatch.toc"]+modules+list(TEXTURES)
-    # A future owner-approved license/notice is required legal distribution material.
+    # Include the selected project license and any accompanying legal notice.
     members += [name for name in ("LICENSE","NOTICE") if (root/name).is_file()]
     for name in members:
         p=(root/name).resolve()

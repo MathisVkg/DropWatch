@@ -1,16 +1,18 @@
-# DropWatch 0.3.0 final release validation
+# DropWatch 0.3.1 final release validation
 
 ## Evidence status
 
-**Automated:** 836 assertions pass, including all prior tests, new notification regressions, byte-identical packaging across timestamp changes, MIT license inclusion, safe archive contents/checksums and booting the exact ZIP in fresh mocked Lua 5.1. All 19 runtime modules load. This is not a WoW client test.
+**Automated:** 921 assertions pass, including all prior test suites, 81 acquisition/quality/upgrade regressions, byte-identical packaging across timestamp changes, MIT license inclusion, safe archive contents/checksums and booting the exact ZIP in fresh mocked Lua 5.1. All 19 runtime modules load. This is not a WoW client test.
 
 **User-reported in game before this RC hardening:** Mythic+ equipment, recipient identification, deduplication, 15-minute Recent expiry, History grouping, Warbound exclusion, main rendering, minimap position and DropWatch branding. No new live test is claimed by the agent.
 
-**Still unperformed for this exact candidate:** final client smoke/upgrade, the two notification fixes under real gameplay, raid-specific awards, broad combat/other-addon coverage, real release screenshots and CurseForge-installed file. Source/Issues access also needs owner verification.
+**Still unperformed for this exact candidate:** final client smoke/upgrade, the acquisition/quality corrections and NPC upgrade reproduction under real gameplay, raid-specific awards, broad combat/other-addon coverage, real release screenshots and CurseForge-installed file. Source/Issues access also needs owner verification.
 
 ## Record each run
 
 Record date, addon version/checksum, /dump GetBuildInfo() output, character/realm (may redact), UI scale, active addons, mode, steps and result. Mark each case Pass/Fail/Not Run; leave boxes unchecked until actually performed. For a failure copy the Lua stack and relevant diagnostic record, reviewing identifiers before sharing.
+
+See [the focused 0.3.1 in-game checklist](IN_GAME_031_CHECKLIST.md) and [root-cause review](LOOT_ACQUISITION_REVIEW.md). The exact upgrade event sequence remains unconfirmed.
 
 ## Manual plan
 
@@ -18,7 +20,7 @@ Record date, addon version/checksum, /dump GetBuildInfo() output, character/real
 | --- | --- | --- | --- |
 | 1 | Fresh install with backed-up preferences, clean AddOns/DropWatch folder | Exact ZIP extracts directly to DropWatch/DropWatch.toc, no old active copy | Not Run |
 | 2 | Upgrade from Loot Tracker via MIGRATION.md with WoW closed | Geometry/mode/opacity/mount/minimap preferences retained; one addon active | Not Run |
-| 3 | Enable script errors, login, /dropwatch status | 0.3.0, interface 120105 on tested client; no handler/registration errors | Not Run |
+| 3 | Enable script errors, login, /dropwatch status | 0.3.1, interface 120105 on tested client; no handler/registration errors | Not Run |
 | 4 | Open/close/minimize Loot/History; resize and overflow | Stable top edge, saved maximum/width, correct wheel/thumb/grip behavior | Not Run |
 | 5 | Move independent settings, change all options, reload | Settings position and values persist; 20/50/75/100% affect only background | Not Run |
 | 6 | Minimap full-circle drag, outside release, scale/size, hide/show | Rim attachment, correct pointer alignment, angle survives reload/login | Not Run |
@@ -35,6 +37,8 @@ Record date, addon version/checksum, /dump GetBuildInfo() output, character/real
 | 17 | /reload with real History and demo active | Matching-owner real snapshots recover; demo removed; no duplicate new-award notifications | Not Run |
 | 18 | Genuine logout/login, disable/re-enable with required reload | New login starts fresh; preferences retained; no duplicate handlers | Not Run |
 | 19 | Usual addons and combat/noncombat | No Lua/taint errors or automatic protected gameplay actions | Not Run |
+| 21 | Confirmed Poor equippable and cold metadata | No Loot/History/notification; debug observations retained; non-Poor gear supported | Not Run |
+| 22 | Repeated NPC upgrades of previously recorded equipment | No award from metadata/upgrade markers; old link/level frozen; trace any acquisition-style message | Not Run |
 | 20 | After approved publication, install through CurseForge cleanly | Correct addon/version/runtime files; smoke, links, minimap and settings work | Not Run |
 
 For modes test automatic opening, manual silence and one compact notification per batch. Specifically test an item that becomes irrelevant/excluded after loading: its outstanding count must decrease/dismiss. A stream exceeding retained History capacity must not retain more notification IDs than retained entries; avoid synthetic client event injection and use normal diagnostic evidence.

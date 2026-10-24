@@ -11,7 +11,7 @@ toc=(ROOT/"DropWatch.toc").read_text()
 check(not (ROOT/"LootTracker.toc").exists(),"old addon manifest removed")
 check("## Title: DropWatch" in toc,"new visible addon title")
 check("## Notes: Group Loot Tracker for Dungeons, Raids & Mythic+" in toc,"exact description")
-check("## Version: 0.3.0" in toc,"target version")
+check("## Version: 0.3.1" in toc,"target version")
 check("## Interface: 120105" in toc,"validated interface unchanged")
 check("## SavedVariables: LootTrackerDB, LootTrackerSession" in toc,"legacy global declarations preserve manual-copy settings")
 modules=[x.strip() for x in toc.splitlines() if x.strip() and not x.startswith("#")]

@@ -1,4 +1,4 @@
-# DropWatch — v0.3.0
+# DropWatch — v0.3.1
 
 **Local release candidate — not published.** Start with [release readiness](docs/REPORT.md), [manual validation](docs/RELEASE_VALIDATION.md) and the [CurseForge author checklist](docs/CURSEFORGE_RELEASE_CHECKLIST.md). MIT is selected and packaged. Real gameplay screenshots and final client validation remain pending.
 
@@ -6,11 +6,11 @@
 
 Automatically track equipment received by group members, review recent drops, and quickly whisper other players.
 
-DropWatch is a standalone WoW Retail Midnight addon with an ElvUI-inspired charcoal interface. It requires no UI framework or external runtime library. The existing loot engine and minimap geometry are preserved. Interface 120105 remains unchanged from the client-tested v0.2.2; no new client version is claimed.
+DropWatch is a standalone WoW Retail Midnight addon with an ElvUI-inspired charcoal interface. It requires no UI framework or external runtime library. The existing UI design and minimap geometry are preserved. Interface 120105 remains unchanged from the client-tested v0.2.2; no new client version is claimed.
 
 ## Install
 
-Exit WoW. Extract DropWatch-0.3.0.zip into _retail_/Interface/AddOns. Verify AddOns/DropWatch/DropWatch.toc exists directly, with no nested duplicate folder. Enable DropWatch and run /dropwatch status to confirm version 0.3.0.
+Exit WoW. Extract DropWatch-0.3.1.zip into _retail_/Interface/AddOns. Verify AddOns/DropWatch/DropWatch.toc exists directly, with no nested duplicate folder. Enable DropWatch and run /dropwatch status to confirm version 0.3.1.
 
 The install ZIP contains runtime files and the MIT LICENSE. Documentation, test fixtures, source artwork and development tools are available in the source tree.
 
@@ -28,6 +28,8 @@ Read [the complete migration instructions](docs/MIGRATION.md) before updating an
 - Session History groups observed instance/difficulty/run context, including separate distinguishable keystones. Expired Recent awards remain in History.
 - Native item icons, rarity colors, class-colored recipients when readable, full-link tooltips and modified clicks are preserved.
 - Quick Whisper opens an empty native input for the clicked recipient. It never sends a message. Own-loot shortcuts are hidden; incomplete identities and demo shortcuts are disabled.
+- Confirmed Poor-quality equipment is excluded; equipment with unavailable quality waits for readable metadata. Rare/Epic and other legitimate non-Poor equipment remain supported.
+- Canonical awards require recognized, non-conflicting acquisition evidence; item-data refreshes cannot independently create awards. Original hyperlinks and captured levels are preserved.
 - Confirmed account/Warband-bound equipment is excluded from Recent, History and new-award displays; diagnostics retain the evidence. Unknown and ordinary Soulbound equipment remain visible. Bonus-roll identity alone does not prove non-tradeability.
 - Automatic panel, compact notification and manual display modes are available. Notifications last ten seconds, independently of Recent retention.
 - The main panel moves/resizes while unlocked. Default width is 420, preferred maximum height 300. Actual expanded height follows content from 128 up to the maximum; width remains user-controlled. A minimal scrollbar handles overflow. Minimize is a separate 32-pixel title-bar state.
@@ -67,6 +69,8 @@ Run python tests/run.py with lupa 2.8 (Lua 5.1 backend). Rebuild original SVG/PN
 The [1024px project icon](Assets/DropWatch-Project.png) and [vector source](Assets/DropWatch-Project.svg) use charcoal, teal radar circles/sweep and a gold equipment shield. The [simplified minimap variant](Assets/DropWatch-Mini.png) has thick details for small sizes; only its uncompressed 32-bit TGA is loaded in game. See [asset build notes](Assets/README.md).
 
 Read [validation](docs/TESTING.md), [architecture](docs/UI_ARCHITECTURE.md), [API review](docs/API_REVIEW.md), [rebrand report](docs/REPORT.md) and [repository configuration](docs/REPOSITORY_RENAME.md). Git history is preserved and the canonical repository is https://github.com/MathisVkg/DropWatch. No release was published; publication awaits owner approval.
+
+See the [0.3.1 investigation](docs/LOOT_ACQUISITION_REVIEW.md) for confirmed corrections versus the unresolved NPC-upgrade event sequence, and the [focused in-game checklist](docs/IN_GAME_031_CHECKLIST.md). Recognized acquisition-style messages during upgrades still need a live trace; no speculative NPC-wide or item-ID suppression is used.
 
 ## Release resources
 

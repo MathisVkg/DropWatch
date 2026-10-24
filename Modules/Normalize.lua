@@ -7,8 +7,17 @@ local ranks = { unavailable=0, inferred=1, confirmed=2 }
 function N:Find(id)
     for _, record in ipairs(ns.normalized) do if record.id == id then return record end end
 end
+-- An item ID, slot, cache callback or changed level is never acquisition evidence.
+function N:HasAcquisition(observation)
+    return observation.parsed == true and observation.itemID ~= nil
+        and not observation.itemIdentityConflict and not observation.recipientConflict
+        and ((observation.source == "CHAT_MSG_LOOT"
+            and (observation.acquisition == "loot" or observation.acquisition == "received"))
+            or (observation.source == "ENCOUNTER_LOOT_RECEIVED" and observation.acquisition == "loot"))
+end
 function N:Eligible(observation)
-    if observation.acquisition == "created" or not observation.itemID then return false end
+    if not self:HasAcquisition(observation) then return false end
+    if observation.equipment and observation.rarity == 0 then return false end
     return observation.equipment or (ns.db.trackMounts and observation.category == "mount")
         or (not observation.loaded and observation.equipLoc == nil)
 end
@@ -34,6 +43,7 @@ local function signature(record)
 end
 function N:Rebuild(record, change, detail)
     local before, oldCategory, oldSelected = signature(record), record.category, record.selected
+    local capturedLevel = record.itemLevel
     record.confidence, record.loaded, record.selected, record.equipment = {}, false, false, false
     -- Keep the earliest complete original link as the primary; each contributing link is also retained.
     for _, field in ipairs(fields) do
@@ -46,6 +56,7 @@ function N:Rebuild(record, change, detail)
             end
         end
     end
+    record.itemLevel = capturedLevel or record.itemLevel
     record.explicitEncounterID=nil
     local provenance, errors={},{}
     for _, observation in ipairs(record.observations) do
@@ -79,6 +90,7 @@ function N:Rebuild(record, change, detail)
         for _, observation in ipairs(record.observations) do
             if observation.status and observation.status:match("^unprocessed:") then record.status=observation.status end
         end
+    elseif record.equipment and record.rarity == nil then record.status="pending item quality"
     elseif record.equipment then record.status="equipment: " .. (record.category or "unknown")
     elseif record.category == "mount" then record.status=record.selected and "mount selected" or "mount tracking off"
     else record.status="filtered: irrelevant" end
@@ -154,6 +166,8 @@ function N:AddSource(record, observation)
     end
 end
 function N:Ingest(observation)
+    -- Replaying the same observation cannot mint a second award or resurrect an evicted one.
+    if observation.canonicalID then return self:Find(observation.canonicalID) end
     if not self:Eligible(observation) then return end
     local strong, uncertain=self:Candidates(observation)
     if #strong==1 and #uncertain==0 then
@@ -186,7 +200,14 @@ end
 function N:Update(observation)
     local record=self:Find(observation.canonicalID)
     if observation.canonicalID and not record then return end -- Never resurrect an evicted record on a late callback.
-    if not record then return self:Ingest(observation) end
+    if not record then
+        -- Only an acquisition candidate already captured by Observe may become classifiable.
+        -- Metadata events cannot submit a standalone record.
+        for _, candidate in ipairs(ns.records) do
+            if candidate == observation then return self:Ingest(observation) end
+        end
+        return
+    end
     local eligible=false
     for _, source in ipairs(record.observations) do eligible=eligible or self:Eligible(source) end
     if not eligible then

@@ -2,7 +2,7 @@
 ## Title: DropWatch
 ## Notes: Group Loot Tracker for Dungeons, Raids & Mythic+
 ## Author: DropWatch contributors
-## Version: 0.3.0
+## Version: 0.3.1
 ## SavedVariables: LootTrackerDB, LootTrackerSession
 
 Core/Namespace.lua

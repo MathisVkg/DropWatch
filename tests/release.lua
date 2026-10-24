@@ -6,7 +6,7 @@ function run_release(ns)
     local H,N=ns.Session,ns.Notification
     ns.db.displayMode="notification"
     local function award(id)
-        return {id=id,timestamp=time(),equipment=true,loaded=true,category="armor",player="Other",realm="Realm",
+        return {id=id,timestamp=time(),equipment=true,loaded=true,rarity=4,category="armor",player="Other",realm="Realm",
             itemID=123,itemName="Fixture",quantity=1,context={instance="Fixture",instanceID=123,difficulty=8,run=1}}
     end
     local originalLimit=H.limit; H.limit=5
@@ -28,7 +28,7 @@ function run_release(ns)
     C_Item.GetItemInfo=function() return nil end
     local link="|cffa335ee|Hitem:123|h[Fixture]|h|r"
     event("CHAT_MSG_LOOT","Other-Realm receives loot: "..link..".")
-    check(#H.entries==1 and N.count==1,"pending equipment may notify once")
+    check(#H.entries==0 and N.count==0,"equipment with unknown quality must wait before notifying")
     C_Item.GetItemInfoInstant=function() return 123,"Junk","Junk","",456,15,0 end
     C_Item.GetItemInfo=function() return "Junk",link,1,1,1,"Junk","Junk",1,"",456,1,15,0 end
     event("ITEM_DATA_LOAD_RESULT",123,true)
